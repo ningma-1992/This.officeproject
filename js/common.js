@@ -17,8 +17,10 @@ function addIdea(
     team,
     title,
     category = title,
-    status = 'Submitted'
+    status = 'Submitted',
 ) {
+    const num_of_votes=0;
+    const voted=false;
     const newIdea = {
         id: Date.now(),
         userName,
@@ -28,7 +30,9 @@ function addIdea(
         category,
         description,
         timestamp: new Date().toISOString(),
-        status
+        status,
+        num_of_votes,
+        voted
     };
 
     const allIdeas = getAllIdeas();

@@ -9,6 +9,7 @@ function closeForm() {
 }
 
 function handleFormSubmit(event) {
+    console.log('mridu');
     event.preventDefault();
     const form = document.getElementById("idea-form");
     const formData = new FormData(form);
