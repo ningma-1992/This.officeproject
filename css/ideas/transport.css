@@ -1,0 +1,19 @@
+.card-container {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    /* allow multiple rows */
+    gap: 24px;
+    /* spacing between cards */
+    justify-content: flex-start;
+    /* align cards to the left */
+    margin-bottom: 24px;
+    /* spacing below container */
+}
+
+.card-container .card {
+    flex: 1 1 calc(33.333% - 16px);
+    /* grow, shrink, base width with gap compensation */
+    max-width: calc(33.333% - 16px);
+    box-sizing: border-box;
+}

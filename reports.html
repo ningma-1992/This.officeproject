@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reports | IdeaHub Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="assets/logo.svg" alt="IdeaHub Logo" />
+        </div>
+        <ul class="links-wrapper">
+            <li><a class="nav-link" href="index.html">Home</a></li>
+            <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
+            <li><a class="nav-link" href="my-ideas.html">My Ideas</a></li>
+            <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
+            <li><a class="nav-link nav-link--active" href="reports.html">Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="header-top">
+            <h3>Reports</h3>
+            <button class="btn btn--primary" id="export-csv">Export to Excel</button>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="dashboard-stats" id="dashboard-stats">
+                <h2 class="dashboard-title">Statistics</h2>
+
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-card" id="team-chart-card">
+                    <h3>Team Distribution</h3>
+                    <canvas id="teamChart"></canvas>
+                </div>
+                <div class="chart-card" id="category-chart-card">
+                    <h3>Category Distribution (Last 30 Days)</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home | IdeaHub Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="assets/logo.svg" alt="IdeaHub Logo" />
+        </div>
+        <ul class="links-wrapper">
+            <li><a class="nav-link nav-link--active" href="index.html">Home</a></li>
+            <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
+            <li><a class="nav-link" href="my-ideas.html">My Ideas</a></li>
+            <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
+            <li><a class="nav-link" href="reports.html">Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+        <div class="header-top">
+            <h3>(💡) Think Tank Canada life</h3>
+            <button class="btn btn--primary" id="add-idea">+ New Idea</button>
+        </div>
+        <div class="card-wrapper">
+        </div>
+
+        <div class="modal" id="myModal">
+            <div class="modal__overlay"></div>
+            <div class="modal__content">
+                <button id="close-idea-form" class="modal__close" aria-label="Close modal">&times;</button>
+                <h2 class="modal__title">Submit New Idea</h2>
+
+                <form class="form" id="idea-form">
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label for="userName" class="form__label">Your Name</label>
+                            <input type="text" id="userName" name="userName" class="form__input"
+                                placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="empId" class="form__label">Employee ID</label>
+                            <input type="text" id="empId" name="empId" class="form__input"
+                                placeholder="Enter your employee ID" required>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="team" class="form__label">Team</label>
+                        <select id="team" name="team" class="form__select" required>
+                            <option value="">Select Team</option>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Backend">Backend</option>
+                            <option value="Design">Design</option>
+                            <option value="QA">QA</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="ideaTitle" class="form__label">Idea Title</label>
+                        <select id="ideaTitle" name="ideaTitle" class="form__select" required>
+                            <option value="">Select Idea Title</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Facility">Facility</option>
+                            <option value="Operation">Operation</option>
+                            <option value="Technology">Technology</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="ideaDesc" class="form__label">Idea Description</label>
+                        <textarea id="ideaDesc" name="ideaDesc" class="form__textarea"
+                            placeholder="Detailed Description (Minimum 50 characters)" rows="4" minlength="50"
+                            required></textarea>
+                    </div>
+
+                    <div class="modal__footer">
+                        <button type="button" class="btn btn--outline" id="cancel-idea-form">Cancel</button>
+                        <button type="submit" class="btn btn--primary" id="idea-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
