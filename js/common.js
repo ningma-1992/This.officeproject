@@ -3,6 +3,7 @@ const IDEAS_LS_KEY = "ideas";
 function getAllIdeas() {
   try {
     const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
+    console.log('ideas22',ideas)
     return ideas;
   } catch (error) {
     console.error("Error getting ideas:", error);
@@ -17,7 +18,7 @@ function addIdea(
   department,
   category,
   description,
-  status = "Submitted"
+  status = "Approved"
 ) {
   const num_of_votes = 30;
   const voted = false;

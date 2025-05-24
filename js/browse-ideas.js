@@ -16,7 +16,7 @@ function renderIdeas() {
                 </div>
                 <h3 class="card__title">${idea.department}</h3>
                 <div class="card__body">
-                    <p>${idea.description} (${idea.empId})</p>
+                    <p>${idea.userName}</p>
                     <p>Manager: ${idea.manager}</p>
                 </div>
                 <div class="card__body">
