@@ -14,10 +14,10 @@ function renderIdeas() {
                     <div class="count-badge count-badge__primary">${idea.category}</div>
                     <span class="badge">${idea.status}</span>
                 </div>
-                <h3 class="card__title">${idea.title}</h3>
+                <h3 class="card__title">${idea.department}</h3>
                 <div class="card__body">
                     <p>${idea.description} (${idea.empId})</p>
-                    <p>Team: ${idea.team}</p>
+                    <p>Manager: ${idea.manager}</p>
                 </div>
                 <div class="card__body">
                     <p>

@@ -341,6 +341,7 @@ body {
 .modal__content {
     position: relative;
     background-color: #ffffff;
+    max-height: 100vh;
     padding: 24px;
     border-radius: 8px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -350,6 +351,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow: auto;
 }
 
 /* Close button */
