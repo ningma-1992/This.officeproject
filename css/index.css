@@ -22,3 +22,8 @@
     text-decoration: none;
     vertical-align: unset;
 }
+
+.card-leaderboard{
+    height: 300px;
+    overflow-y: auto;
+}

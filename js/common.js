@@ -18,7 +18,7 @@ function addIdea(
   department,
   category,
   description,
-  status = "Approved"
+  status = "Rejected"
 ) {
   const num_of_votes = 30;
   const voted = false;
