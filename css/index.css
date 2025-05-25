@@ -1,12 +1,16 @@
 .main-content{
-    padding: 0px ;
+    padding: 70px 0px 0px 0px ;
 }
 .header-top{
     padding: 20px;
     background: #ba0c2f;
-    display: flex
-    ;
-        justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: calc(100% - 250px);
+    z-index: 99;
+    top: 0;
+    height: 70px;
 }
 .card-wrapper {
     display: grid;
@@ -33,9 +37,19 @@
     vertical-align: unset;
 }
 
-.card-leaderboard{
+.leaderboard-chart{
     max-height: 300px;
     overflow-y: auto;
+    padding-top: 10px;
+}
+.home_headind{
+    padding-top: 34px !important;
+}
+.home_headind h3{
+    font-size: 32px !important;
+}
+.leaderboard-chart div{
+    height: 40px;
 }
 .heading-count-icon{
  display: flex;
