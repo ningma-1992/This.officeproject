@@ -29,7 +29,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
+  z-index: 99999;
 }
 .modal.hidden {
   display: none;
@@ -38,11 +38,11 @@
   background: white;
   padding: 20px;
   width: 90%;
-  max-width: 500px;
+  max-width: 900px;
   border-radius: 8px;
   position: relative;
     height: 100vh;
-  overflow: scroll;
+  overflow: auto;
 }
 .modal-content label {
   display: block;
@@ -61,3 +61,13 @@
   cursor: pointer;
   font-size: 20px;
 }
+.vote-btn{
+  padding: 3px;
+
+ }
+ .vote-btn i{
+  font-size: 14px;
+ }
+ .vote-btn .fa-solid {
+  color: #ba0c2f;
+ }
