@@ -1,67 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Browse Ideas | IdeaHub Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/browse-ideas.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/browse-ideas.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
-        <div class="logo">
-            <img src="assets/logo.svg" alt="IdeaHub Logo" />
-        </div>
-        <ul class="links-wrapper">
-            <li><a class="nav-link" href="index.html">Home</a></li>
-            <li><a class="nav-link nav-link--active" href="browse-ideas.html">Browse Ideas</a></li>
-            <li><a class="nav-link" href="my-ideas.html">My Ideas</a></li>
-            <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
-            <li><a class="nav-link" href="reports.html">Reports</a></li>
-        </ul>
+      <div class="logo">
+        <img src="assets/logo.svg" alt="IdeaHub Logo" />
+      </div>
+      <ul class="links-wrapper">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li>
+          <a class="nav-link nav-link--active" href="browse-ideas.html"
+            >Browse Ideas</a
+          >
+        </li>
+        <li><a class="nav-link" href="my-ideas.html">My Ideas</a></li>
+        <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
+        <li><a class="nav-link" href="reports.html">Reports</a></li>
+      </ul>
     </nav>
 
     <!-- Main Content Area -->
     <main class="main-content">
-        <div class="header-top">
-            <h3>Browse Ideas</h3>
+      <div class="header-top">
+        <h3>Browse Ideas</h3>
+      </div>
+
+      <div class="card-container"></div>
+
+      <div id="browseIdeaModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-button" id="browseModalCloseBtn">&times;</span>
+          <h3>Idea Details</h3>
+          <form id="browseIdeaForm">
+            <label
+              >Category: <input type="text" id="browseCategory" disabled
+            /></label>
+            <label
+              >Department: <input type="text" id="browseDepartment" disabled
+            /></label>
+            <label
+              >Submitted By: <input type="text" id="browseUserName" disabled
+            /></label>
+            <label
+              >Manager: <input type="text" id="browseManager" disabled
+            /></label>
+            <label
+              >Status: <input type="text" id="browseStatus" disabled
+            /></label>
+            <label
+              >Votes: <input type="text" id="browseVotes" disabled
+            /></label>
+            <label
+              >Description:
+              <textarea id="browseDescription" disabled></textarea>
+            </label>
+            <label
+              >Month: <input type="text" id="browseMonth" disabled
+            /></label>
+            <label
+              >Submitted On: <input type="text" id="browseTimestamp" disabled
+            /></label>
+          </form>
         </div>
-
-        <div class="card-container">
-        </div>
-
-
-        <div id="browseIdeaModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close-button" id="browseModalCloseBtn">&times;</span>
-    <h3>Idea Details</h3>
-    <form id="browseIdeaForm">
-      <label>Category: <input type="text" id="browseCategory" disabled></label>
-      <label>Department: <input type="text" id="browseDepartment" disabled></label>
-      <label>Submitted By: <input type="text" id="browseUserName" disabled></label>
-      <label>Manager: <input type="text" id="browseManager" disabled></label>
-      <label>Status: <input type="text" id="browseStatus" disabled></label>
-      <label>Votes: <input type="text" id="browseVotes" disabled></label>
-      <label>Description: <textarea id="browseDescription" disabled></textarea></label>
-      <label>Month: <input type="text" id="browseMonth" disabled></label>
-      <label>Submitted On: <input type="text" id="browseTimestamp" disabled></label>
-    </form>
-  </div>
-</div>
-
+      </div>
     </main>
 
     <script src="js/common.js"></script>
     <script src="js/browse-ideas.js"></script>
-</body>
-
+  </body>
 </html>
