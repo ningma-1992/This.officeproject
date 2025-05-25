@@ -4,14 +4,13 @@
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    margin-top: 24px;
     /* allow multiple rows */
     gap: 24px;
     /* spacing between cards */
-    /* justify-content: flex-start; */
+    justify-content: flex-start;
     /* align cards to the left */
     margin-bottom: 24px;
+    padding: 20px !important;
     /* spacing below container */
 }
 

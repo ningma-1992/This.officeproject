@@ -1,8 +1,20 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* allow multiple rows */
+  gap: 10px;
+  /* spacing between cards */
+  justify-content: flex-start;
+  /* align cards to the left */
+  margin-bottom: 24px;
+  padding: 20px !important;
+  /* spacing below container */
+}
 .activity-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 24px;
+  width: 100%;
 }
 
 .activity-item {
@@ -14,7 +26,7 @@
   border: 1px solid #e0e6ed;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(50, 58, 71, 0.05);
-  border-left: 5px solid #727cf5;
+  border-left: 5px solid #ba0c2f;
 }
 
 
@@ -49,8 +61,8 @@
   padding: 2px 8px;
   font-size: 0.75rem;
   font-weight: 600;
-  background-color: #e3e7ff;
-  color: #4953d3;
+  background-color: #ba0c2f;
+  color: #fff;
   border-radius: 4px;
 }
 
@@ -59,6 +71,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-left: auto;
 }
 .filter-bar label {
   font-weight: bold;

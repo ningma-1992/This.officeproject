@@ -1,5 +1,4 @@
 .card-container {
-    margin-top: 24px;
     display: flex;
     flex-wrap: wrap;
     /* allow multiple rows */
@@ -8,6 +7,7 @@
     justify-content: flex-start;
     /* align cards to the left */
     margin-bottom: 24px;
+    padding: 20px !important;
     /* spacing below container */
 }
 

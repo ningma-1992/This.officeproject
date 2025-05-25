@@ -4,7 +4,6 @@
     flex-wrap: wrap;
     margin-top: 32px;
 }
-
 .dashboard-stats {
     flex: 1;
     min-width: 280px;
@@ -89,7 +88,9 @@
     flex: 1;
     min-width: 320px;
 }
-
+.card-wrapper-reports{
+   padding: 0px 20px;
+}
 .chart-card h3 {
     font-size: 1.1rem;
     margin-bottom: 16px;
