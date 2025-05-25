@@ -156,7 +156,7 @@ function showLeaderboard() {
   // Generate leaderboard HTML
   const leaderboardHTML = sortedIdeas.map((idea, index) => `
     <div>
-      <strong class="leaderboard-index">#${index + 1}</strong> : ${idea.userName} (${idea.num_of_votes} votes)
+      <strong class="leaderboard-index">#${index + 1}</strong> ${idea.userName} (${idea.num_of_votes} votes)
     </div>
   `).join('');
 
