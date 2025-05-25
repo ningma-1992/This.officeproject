@@ -15,6 +15,7 @@ body {
 body {
     display: flex;
     background-color: #f9fafe;
+    padding: 0px !important;
 }
 
 /* Sidebar */
@@ -81,6 +82,14 @@ body {
 }
 
 /* Main content */
+.main-content2 {
+    margin-left: 250px;
+    padding: 20px;
+    /* flex: 1; */
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+    /* min-height: 100vh; */
+}
 .main-content {
     margin-left: 250px;
     padding: 36px;
@@ -89,7 +98,17 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
 }
-
+.select2-container .select2-selection--single{
+    height: 36px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 36px !important;
+    top: 0 !important;
+    right: 8px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 33px !important;
+}
 /* Base button */
 .btn {
     padding: 10px 16px;

@@ -10,6 +10,26 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/reports.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        .Chart_container {
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        body {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -17,7 +37,7 @@
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <div class="logo">
-            <img src="assets/logo.svg" alt="IdeaHub Logo" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/73/The_Canada_Life_Assurance_Company_logo_%28post-amalgamation%29.svg" alt="IdeaHub Logo" />
         </div>
         <ul class="links-wrapper">
             <li><a class="nav-link" href="index.html">Home</a></li>
@@ -29,32 +49,451 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="main-content">
+    <main class="main-content2">
         <div class="header-top">
             <h3>Reports</h3>
             <button class="btn btn--primary" id="export-csv">Export to Excel</button>
         </div>
-
-        <div class="dashboard-section">
-            <div class="dashboard-stats" id="dashboard-stats">
-                <h2 class="dashboard-title">Statistics</h2>
-
+        <div class="my-4 row">
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Total Ideas</div>
+                        <p class="card-text">7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Managers</div>
+                        <p class="card-text">284</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Department</div>
+                        <p class="card-text">5</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Categories</div>
+                        <p class="card-text">5</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="charts-container">
-                <div class="chart-card" id="team-chart-card">
-                    <h3>Team Distribution</h3>
-                    <canvas id="teamChart"></canvas>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Total Approved</div>
+                        <p class="card-text">7</p>
+                    </div>
                 </div>
-                <div class="chart-card" id="category-chart-card">
-                    <h3>Category Distribution (Last 30 Days)</h3>
-                    <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Total Rejected</div>
+                        <p class="card-text">134</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">In-Preview</div>
+                        <p class="card-text">150</p>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="manager" class="form-label">Select Manager:</label>
+                <select id="manager" class="form-select">
+                    <option value="" disabled selected>Select a manager</option>
+                    <option value="john">John Doe</option>
+                    <option value="jane">Jane Smith</option>
+                    <option value="mark">Mark Johnson</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="month2" class="form-label">Select Month:</label>
+                <select id="month2" class="form-select" disabled>
+                    <option value="" disabled selected>Select a month</option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button class="btn btn-success" id="downloadBtn2" disabled>Download Excel</button>
+              </div>
+        </div>
+
+        <table class="table table-bordered text-center mb-5">
+            <thead class="table-light">
+                <tr>
+                    <th>Manager</th>
+                    <th>Month</th>
+                    <th>Glands and Organs</th>
+                    <th>Vitamins and Minerals</th>
+                    <th>Herbal Supplements</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="dataRow">
+                    <td id="managerName">—</td>
+                    <td id="monthName">—</td>
+                    <td id="glands">0</td>
+                    <td id="vitamins">0</td>
+                    <td id="herbal">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row mb-3">
+            <!-- Category Dropdown -->
+            <div class="col-md-6">
+                <label for="category" class="mb-2">Select Category:</label>
+                <select id="category" class="form-select">
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="glands">Glands and Organs</option>
+                    <option value="vitamins">Vitamins and Minerals</option>
+                    <option value="supplements">Herbal Supplements</option>
+                </select>
+            </div>
+
+            <!-- Month Dropdown -->
+            <div class="col-md-6">
+                <label for="month" class="mb-2">Select Month:</label>
+                <select id="month" class="form-select" disabled>
+                    <option value="" disabled selected>Select a month</option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Totals Summary Cards -->
+        <div class="row text-center mb-4">
+            <div class="col-md-6 summary">
+                <div class="card p-3 mb-3">
+                    <h6>Total Submitted (All Months)</h6>
+                    <h4 id="totalSubmittedAll">0</h4>
+
+                </div>
+                <div class="card p-3 mb-3">
+                    <h6>Approved (All Months)</h6>
+                    <h4 id="totalApprovedAll">0</h4>
+                </div>
+                <div class="card p-3 mb-3">
+                    <h6>In-Preview (All Months)</h6>
+                    <h4 id="totalPreviewAll">0</h4>
+                </div>
+                <div class="card p-3 mb-3">
+                    <h6>Rejected (All Months)</h6>
+                    <h4 id="totalRejectedAll">0</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Selected Month Summary -->
+                <div class="text-center mb-3 d-flex justify-content-between">
+                    <h5>Total Submitted Ideas <br> (Selected Month): <span id="totalSubmitted"
+                            style="margin-left: 10px; color: rgb(10, 119, 208);">0</span></h5>
+
+                    <!-- Download Button -->
+                    <div class="text-end">
+                        <button class="btn btn-success" id="downloadExcel" disabled>Download Excel</button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="mb-4" style="width: 100%; height: 400px; display: flex; justify-content: center;">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        </div>
+
+
 
     </main>
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- SheetJS (XLSX) for Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- jsPDF for PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+
+        const dummyData = {
+            glands: {
+                january: { submitted: { idea1: 10, idea2: 15 }, status: { preview: 5, approved: 15, rejected: 5 } },
+                february: { submitted: { idea1: 7, idea2: 8 }, status: { preview: 3, approved: 10, rejected: 2 } },
+                march: { submitted: { idea1: 4, idea2: 6 }, status: { preview: 2, approved: 8, rejected: 1 } },
+                april: { submitted: { idea1: 5, idea2: 10 }, status: { preview: 3, approved: 9, rejected: 3 } },
+            },
+            vitamins: {
+                january: { submitted: { idea1: 20, idea2: 20 }, status: { preview: 10, approved: 25, rejected: 5 } },
+                february: { submitted: { idea1: 15, idea2: 10 }, status: { preview: 7, approved: 20, rejected: 3 } },
+                march: { submitted: { idea1: 12, idea2: 8 }, status: { preview: 6, approved: 18, rejected: 2 } },
+                may: { submitted: { idea1: 14, idea2: 11 }, status: { preview: 5, approved: 17, rejected: 4 } },
+            },
+            supplements: {
+                january: { submitted: { idea1: 8, idea2: 10 }, status: { preview: 3, approved: 12, rejected: 3 } },
+                february: { submitted: { idea1: 6, idea2: 9 }, status: { preview: 2, approved: 9, rejected: 1 } },
+                april: { submitted: { idea1: 10, idea2: 5 }, status: { preview: 4, approved: 10, rejected: 2 } },
+                june: { submitted: { idea1: 9, idea2: 6 }, status: { preview: 3, approved: 11, rejected: 2 } },
+            }
+        };
+        const dummyData2 = {
+            john: {
+                "Glands and Organs": {
+                    january: { submitted: { idea1: 10, idea2: 15 } },
+                    february: { submitted: { idea1: 7, idea2: 8 } },
+                },
+                "Vitamins and Minerals": {
+                    january: { submitted: { idea1: 20, idea2: 20 } },
+                    march: { submitted: { idea1: 12, idea2: 8 } }
+                },
+                "Herbal Supplements": {
+                    april: { submitted: { idea1: 10, idea2: 5 } }
+                }
+            },
+            jane: {
+                "Herbal Supplements": {
+                    january: { submitted: { idea1: 8, idea2: 10 } },
+                    april: { submitted: { idea1: 10, idea2: 5 } }
+                },
+                "Glands and Organs": {
+                    march: { submitted: { idea1: 4, idea2: 6 } }
+                },
+                "Vitamins and Minerals": {}
+            },
+            mark: {
+                "Glands and Organs": {
+                    march: { submitted: { idea1: 4, idea2: 6 } }
+                },
+                "Vitamins and Minerals": {
+                    february: { submitted: { idea1: 15, idea2: 10 } }
+                },
+                "Herbal Supplements": {
+                    june: { submitted: { idea1: 9, idea2: 6 } }
+                }
+            }
+        };
+
+        const categorySelect = document.getElementById('category');
+        const monthSelect = document.getElementById('month');
+        const totalSubmittedEl = document.getElementById('totalSubmitted');
+        const downloadBtn = document.getElementById('downloadExcel');
+        const totalSubmittedAllEl = document.getElementById('totalSubmittedAll');
+        const totalApprovedAllEl = document.getElementById('totalApprovedAll');
+        const totalPreviewAllEl = document.getElementById('totalPreviewAll');
+        const totalRejectedAllEl = document.getElementById('totalRejectedAll');
+
+        let chart;
+
+        categorySelect.addEventListener('change', () => {
+            monthSelect.disabled = false;
+            monthSelect.value = "";
+            totalSubmittedEl.textContent = "0";
+            downloadBtn.disabled = true;
+            updateTotalsAllMonths(categorySelect.value);
+            updateChart([0, 0, 0]);
+        });
+
+        monthSelect.addEventListener('change', () => {
+            if (categorySelect.value && monthSelect.value) {
+                updateMonthlyData(categorySelect.value, monthSelect.value);
+                downloadBtn.disabled = false;
+            } else {
+                totalSubmittedEl.textContent = "0";
+                updateChart([0, 0, 0]);
+                downloadBtn.disabled = true;
+            }
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const cat = categorySelect.value;
+            const mon = monthSelect.value;
+            if (!cat || !mon) return alert("Select category and month");
+
+            const data = dummyData[cat]?.[mon];
+            if (!data) return alert("No data available");
+
+            const totalSubmitted = Object.values(data.submitted).reduce((a, b) => a + b, 0);
+
+            const worksheetData = [
+                ['Category', 'Month', 'Total Submitted', 'In-Preview', 'Approved', 'Rejected'],
+                [cat, mon, totalSubmitted, data.status.preview, data.status.approved, data.status.rejected]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+            XLSX.writeFile(workbook, `data_${cat}_${mon}.xlsx`);
+        });
+
+        function updateMonthlyData(category, month) {
+            const data = dummyData[category]?.[month];
+            if (!data) {
+                totalSubmittedEl.textContent = "0";
+                updateChart([0, 0, 0]);
+                return;
+            }
+            const totalSubmitted = Object.values(data.submitted).reduce((a, b) => a + b, 0);
+            totalSubmittedEl.textContent = totalSubmitted;
+            updateChart([data.status.preview, data.status.approved, data.status.rejected]);
+        }
+
+        function updateTotalsAllMonths(category) {
+            if (!category || !dummyData[category]) {
+                totalSubmittedAllEl.textContent = '0';
+                totalApprovedAllEl.textContent = '0';
+                totalPreviewAllEl.textContent = '0';
+                totalRejectedAllEl.textContent = '0';
+                return;
+            }
+            let sub = 0, appr = 0, prev = 0, rej = 0;
+            Object.values(dummyData[category]).forEach(monthData => {
+                sub += Object.values(monthData.submitted).reduce((a, b) => a + b, 0);
+                appr += monthData.status.approved;
+                prev += monthData.status.preview;
+                rej += monthData.status.rejected;
+            });
+            totalSubmittedAllEl.textContent = sub;
+            totalApprovedAllEl.textContent = appr;
+            totalPreviewAllEl.textContent = prev;
+            totalRejectedAllEl.textContent = rej;
+        }
+
+        function updateChart(dataArr) {
+            if (!chart) {
+                const ctx = document.getElementById('statusChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['In-Preview', 'Approved', 'Rejected'],
+                        datasets: [{ data: dataArr, backgroundColor: ['#ffc107', '#28a745', '#dc3545'] }]
+                    },
+                    options: { responsive: true, plugins: { legend: { position: 'bottom' }, title: { display: true, text: 'Idea Status Breakdown' } } }
+                });
+            } else {
+                chart.data.datasets[0].data = dataArr;
+                chart.update();
+            }
+        }
+        const managerSelect = document.getElementById('manager');
+const monthSelect2 = document.getElementById('month2');
+const downloadBtn2 = document.getElementById('downloadBtn2');
+
+managerSelect.addEventListener('change', updateTable);
+monthSelect2.addEventListener('change', updateTable);
+downloadBtn2.addEventListener('click', downloadExcel);
+
+function updateTable() {
+  const manager = managerSelect.value;
+  const month = monthSelect2.value;
+
+  document.getElementById('managerName').textContent = managerSelect.options[managerSelect.selectedIndex]?.text || '—';
+  document.getElementById('monthName').textContent = month ? month.charAt(0).toUpperCase() + month.slice(1) : '—';
+
+  if (!manager) {
+    monthSelect2.disabled = true;
+    downloadBtn2.disabled = true;
+    resetValues();
+    return;
+  }
+
+  monthSelect2.disabled = false;
+
+  if (!month) {
+    resetValues();
+    downloadBtn2.disabled = true;
+    return;
+  }
+
+  const managerData = dummyData2[manager];
+
+  document.getElementById('glands').textContent = getMonthlyTotal(managerData["Glands and Organs"], month);
+  document.getElementById('vitamins').textContent = getMonthlyTotal(managerData["Vitamins and Minerals"], month);
+  document.getElementById('herbal').textContent = getMonthlyTotal(managerData["Herbal Supplements"], month);
+
+  downloadBtn2.disabled = false;
+}
+
+function getMonthlyTotal(categoryData, month) {
+  if (!categoryData || !categoryData[month]) return 0;
+  return Object.values(categoryData[month].submitted || {}).reduce((a, b) => a + b, 0);
+}
+
+function resetValues() {
+  document.getElementById('managerName').textContent = '—';
+  document.getElementById('monthName').textContent = '—';
+  document.getElementById('glands').textContent = '0';
+  document.getElementById('vitamins').textContent = '0';
+  document.getElementById('herbal').textContent = '0';
+}
+
+function downloadExcel() {
+  const manager = managerSelect.options[managerSelect.selectedIndex]?.text;
+  const month = monthSelect2.value;
+
+  const data = [
+    ["Manager", "Month", "Glands and Organs", "Vitamins and Minerals", "Herbal Supplements"],
+    [
+      manager,
+      month.charAt(0).toUpperCase() + month.slice(1),
+      document.getElementById("glands").textContent,
+      document.getElementById("vitamins").textContent,
+      document.getElementById("herbal").textContent
+    ]
+  ];
+
+  const worksheet = XLSX.utils.aoa_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
+
+  XLSX.writeFile(workbook, `${manager}_${month}_report.xlsx`);
+}
+    </script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/common.js"></script>
     <script src="js/reports.js"></script>
