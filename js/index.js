@@ -27,6 +27,33 @@ function handleFormSubmit(event) {
   closeForm();
   totalIdeas();
   totalApprovedIdeas();
+  totalRejectedIdeas();
+  showLeaderboard();
+};
+
+// Saving as draft
+
+function saveAsDraft(event) {
+  event.preventDefault();
+  const form = document.getElementById("idea-form");
+  const formData = new FormData(form);
+  const idea = Object.fromEntries(formData.entries());
+  console.log("idea", idea);
+  saveDraft(
+    idea.userName,
+    idea.empId,
+    idea.manager,
+    idea.department,
+    idea.category,
+    idea.description
+  );
+  showAlert("success", "Saved as draft!");
+  form.reset();
+  closeForm();
+  totalIdeas();
+  totalApprovedIdeas();
+  totalRejectedIdeas();
+  showLeaderboard();
 }
 
 function totalIdeas() {
@@ -153,6 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("cancel-idea-form")
     .addEventListener("click", closeForm);
+      document
+    .getElementById("save-as-draft")
+    .addEventListener("click", saveAsDraft);
   document
     .getElementById("idea-form")
     .addEventListener("submit", handleFormSubmit);

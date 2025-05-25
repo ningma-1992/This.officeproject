@@ -1,4 +1,5 @@
 const IDEAS_LS_KEY = "ideas";
+const DRAFT_IDEAS_LS_KEY = "drafts";
 
 function getAllIdeas() {
   try {
@@ -7,6 +8,17 @@ function getAllIdeas() {
     return ideas;
   } catch (error) {
     console.error("Error getting ideas:", error);
+    return [];
+  }
+};
+
+function getAllDrafts() {
+  try {
+    const drafts = JSON.parse(localStorage.getItem(DRAFT_IDEAS_LS_KEY)) || [];
+    console.log('drafts',drafts)
+    return drafts;
+  } catch (error) {
+    console.error("Error getting drafts:", error);
     return [];
   }
 }
@@ -41,6 +53,39 @@ function addIdea(
   const allIdeas = getAllIdeas();
   allIdeas.unshift(newIdea);
   localStorage.setItem(IDEAS_LS_KEY, JSON.stringify(allIdeas));
+  return newIdea;
+};
+
+function saveDraft(
+  userName,
+  empId,
+  manager,
+  department,
+  category,
+  description,
+  status = "as Draft"
+) {
+  const num_of_votes = 0;
+  const voted = false;
+  const month = "february"; // curently we are using this field to show the data monyh wise, but later on by timestamp we will filter the data
+  const newIdea = {
+    id: Date.now(),
+    userName,
+    empId,
+    manager,
+    department,
+    category,
+    description,
+    status,
+    num_of_votes,
+    voted,
+    month,
+    timestamp: new Date().toISOString(),
+  };
+
+  const allDrafts = getAllDrafts();
+  allDrafts.unshift(newIdea);
+  localStorage.setItem(DRAFT_IDEAS_LS_KEY, JSON.stringify(allDrafts));
   return newIdea;
 }
 
