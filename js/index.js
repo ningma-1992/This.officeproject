@@ -1,128 +1,189 @@
 function openForm() {
-    const modal = document.getElementById("myModal");
-    modal.classList.add("modal--active");
+  const modal = document.getElementById("myModal");
+  modal.classList.add("modal--active");
 }
 
 function closeForm() {
-    const modal = document.getElementById("myModal");
-    modal.classList.remove("modal--active");
+  const modal = document.getElementById("myModal");
+  modal.classList.remove("modal--active");
 }
 
 function handleFormSubmit(event) {
-    console.log('mridu');
-    event.preventDefault();
-    const form = document.getElementById("idea-form");
-    const formData = new FormData(form);
-    const idea = Object.fromEntries(formData.entries());
-    addIdea(
-        idea.userName,
-        idea.empId,
-        idea.ideaDesc,
-        idea.team,
-        idea.ideaTitle,
-    );
-    showAlert("success", "Idea submitted successfully!");
-    form.reset();
-    closeForm();
-    renderCards();
+  event.preventDefault();
+  const form = document.getElementById("idea-form");
+  const formData = new FormData(form);
+  const idea = Object.fromEntries(formData.entries());
+  console.log("idea", idea);
+  addIdea(
+    idea.userName,
+    idea.empId,
+    idea.manager,
+    idea.department,
+    idea.category,
+    idea.description
+  );
+  showAlert("success", "Idea submitted successfully!");
+  form.reset();
+  closeForm();
+  totalIdeas();
+  totalApprovedIdeas();
+  totalRejectedIdeas();
+  showLeaderboard();
+};
+
+// Saving as draft
+
+function saveAsDraft(event) {
+  event.preventDefault();
+  const form = document.getElementById("idea-form");
+  const formData = new FormData(form);
+  const idea = Object.fromEntries(formData.entries());
+  console.log("idea", idea);
+  saveDraft(
+    idea.userName,
+    idea.empId,
+    idea.manager,
+    idea.department,
+    idea.category,
+    idea.description
+  );
+  showAlert("success", "Saved as draft!");
+  form.reset();
+  closeForm();
+  totalIdeas();
+  totalApprovedIdeas();
+  totalRejectedIdeas();
+  showLeaderboard();
 }
 
-function generateChart(canvasId, dataObj, label) {
-    const ctx = document.getElementById(canvasId).getContext("2d");
-    console.log(dataObj);
-    new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: Object.keys(dataObj),
-            datasets: [{
-                label: label,
-                data: Object.values(dataObj),
-                backgroundColor: [
-                    "#727cf5", "#f77e53", "#47c363", "#ffa534", "#8884d8", "#82ca9d", "#a4de6c"
-                ],
-                borderColor: "#fff",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: "bottom"
-                }
-            }
-        }
-    });
+function totalIdeas() {
+  const ideas = getAllIdeas();
+  console.log("ideas", ideas.length);
+
+  const wrapper = document.querySelector(".card-wrapper");
+
+  // Look for or create the total ideas card
+  let card = wrapper.querySelector(".card-total");
+
+  if (!card) {
+    card = document.createElement("div");
+    card.className = "card card-total";
+    wrapper.appendChild(card);
+  }
+
+  card.innerHTML = `
+    <h3>${ideas.length}</h3>
+    <p>ideas submitted.</p>
+  `;
+}
+
+function totalApprovedIdeas() {
+  const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
+
+  // Count approved ideas
+  const approvedCount = ideas.filter(
+    (idea) => idea.status === "Approved"
+  ).length;
+
+  console.log("Total Approved Ideas:", approvedCount);
+
+  const wrapper = document.querySelector(".card-wrapper");
+
+  // Look for or create the approved ideas card
+  let card = wrapper.querySelector(".card-approved");
+
+  if (!card) {
+    card = document.createElement("div");
+    card.className = "card card-approved";
+    wrapper.appendChild(card);
+  }
+
+  card.innerHTML = `
+    <h3>${approvedCount}</h3>
+    <p>ideas approved.</p>
+  `;
+};
+
+// Total Rejected Ideas--------
+function totalRejectedIdeas() {
+  const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
+
+  // Count approved ideas
+  const rejectedCount = ideas.filter(
+    (idea) => idea.status === "Rejected"
+  ).length;
+
+  console.log("Total Rejected Ideas:", rejectedCount);
+
+  const wrapper = document.querySelector(".card-wrapper");
+
+  // Look for or create the rejected ideas card
+  let card = wrapper.querySelector(".card-ideasRejected");
+
+  if (!card) {
+    card = document.createElement("div");
+    card.className = "card card-ideasRejected";
+    wrapper.appendChild(card);
+  }
+
+  card.innerHTML = `
+    <h3>${rejectedCount}</h3>
+    <p>ideas rejected.</p>
+  `;
+};
+
+function showLeaderboard() {
+  const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
+
+  // Sort ideas by num_of_votes in descending order
+  const sortedIdeas = ideas
+    .filter(idea => typeof idea.num_of_votes === 'number')
+    .sort((a, b) => b.num_of_votes - a.num_of_votes);
+
+  const wrapper = document.querySelector('.card-wrapper');
+
+  // Look for or create the leaderboard card
+  let card = wrapper.querySelector('.card-leaderboard');
+
+  if (!card) {
+    card = document.createElement('div');
+    card.className = 'card card-leaderboard';
+    wrapper.appendChild(card);
+  }
+
+  // Generate leaderboard HTML
+  const leaderboardHTML = sortedIdeas.map((idea, index) => `
+    <div>
+      <strong>#${index + 1}:</strong> ${idea.userName} (${idea.num_of_votes} votes)
+    </div>
+  `).join('');
+
+  card.innerHTML = `
+    <h3>Leaderboard</h3>
+    ${leaderboardHTML || '<p>No votes yet.</p>'}
+  `;
 }
 
 
-function renderCards() {
-    const ideas = getAllIdeas();
-    const ideasContainer = document.querySelector('.card-wrapper');
-    ideasContainer.innerHTML = ''; // Clear previous content
-    const statusCounts = {
-        operation: {
-            total: 0,
-            month: 0
-        },
-        facility: {
-            total: 0,
-            month: 0
-        },
-        transport: {
-            total: 0,
-            month: 0
-        },
-        technology: {
-            total: 0,
-            month: 0
-        }
-    };
-    if (Array.isArray(ideas)) {
-        for (const idea of ideas) {
-            const category = String(idea.category).trim().toLowerCase();
-            if (category) {
-                const ideaDate = new Date(idea.timestamp);
-                const now = new Date();
-                const thirtyDaysAgo = new Date();
-                thirtyDaysAgo.setDate(now.getDate() - 30);
-
-                if (ideaDate >= thirtyDaysAgo) {
-                    statusCounts[category].month++;
-                }
-                statusCounts[category].total++;
-            }
-        }
-
-    }
-    for (const category of Object.keys(statusCounts)) {
-        const ideaCard = document.createElement('a');
-        ideaCard.className = 'card card--link';
-        ideaCard.href = `ideas/${category}.html`;
-        ideaCard.innerHTML = `
-        <div class="card__body">
-            <div class="card__title-row">
-            <span class="card__title">${category}</span>
-            <div class="count-badge">
-                <span class="count-badge__primary">${statusCounts[category].month} this month</span>
-                <small class="count-badge__secondary">${statusCounts[category].total} total</small>
-            </div>
-            </div>
-            <canvas id="chart-${category}" width="120" height="120"></canvas>
-        </div>
-        `;
-        ideasContainer.appendChild(ideaCard);
-        generateChart(`chart-${category}`, {
-            'This Month': statusCounts[category].month,
-            'Total': statusCounts[category].total - statusCounts[category].month
-        }, 'Submissions');
-    }
-}
+// Call both functions
+totalIdeas();
+totalApprovedIdeas();
+totalRejectedIdeas();
+showLeaderboard();
 
 document.addEventListener("DOMContentLoaded", function () {
-    renderCards();
-    document.getElementById("add-idea").addEventListener("click", openForm);
-    document.getElementById("close-idea-form").addEventListener("click", closeForm);
-    document.getElementById("cancel-idea-form").addEventListener("click", closeForm);
-    document.getElementById("idea-form").addEventListener("submit", handleFormSubmit);
+  // renderCards();
+  document.getElementById("add-idea").addEventListener("click", openForm);
+  document
+    .getElementById("close-idea-form")
+    .addEventListener("click", closeForm);
+  document
+    .getElementById("cancel-idea-form")
+    .addEventListener("click", closeForm);
+      document
+    .getElementById("save-as-draft")
+    .addEventListener("click", saveAsDraft);
+  document
+    .getElementById("idea-form")
+    .addEventListener("submit", handleFormSubmit);
 });

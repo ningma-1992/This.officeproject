@@ -7,7 +7,8 @@
 }
 
 .card {
-    height: 38vh;
+    width: 300px;
+    height: 100px;
 }
 
 .card__title {
@@ -20,4 +21,9 @@
     font-weight: 700;
     text-decoration: none;
     vertical-align: unset;
+}
+
+.card-leaderboard{
+    height: 300px;
+    overflow-y: auto;
 }

@@ -38,6 +38,26 @@
 
         <div class="card-container">
         </div>
+
+
+        <div id="browseIdeaModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-button" id="browseModalCloseBtn">&times;</span>
+    <h3>Idea Details</h3>
+    <form id="browseIdeaForm">
+      <label>Category: <input type="text" id="browseCategory" disabled></label>
+      <label>Department: <input type="text" id="browseDepartment" disabled></label>
+      <label>Submitted By: <input type="text" id="browseUserName" disabled></label>
+      <label>Manager: <input type="text" id="browseManager" disabled></label>
+      <label>Status: <input type="text" id="browseStatus" disabled></label>
+      <label>Votes: <input type="text" id="browseVotes" disabled></label>
+      <label>Description: <textarea id="browseDescription" disabled></textarea></label>
+      <label>Month: <input type="text" id="browseMonth" disabled></label>
+      <label>Submitted On: <input type="text" id="browseTimestamp" disabled></label>
+    </form>
+  </div>
+</div>
+
     </main>
 
     <script src="js/common.js"></script>
