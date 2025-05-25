@@ -92,6 +92,7 @@ body {
     overflow-x: hidden;
     /* min-height: 100vh; */
     padding-top: 70px;
+    width: 100%;
 }
 .main-content {
     margin-left: 250px;
@@ -100,6 +101,8 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 100vh;
+    width: 100%;
+
 }
 .select2-container .select2-selection--single{
     height: 36px !important;
@@ -574,4 +577,37 @@ body {
   height: 100%;
   background-color: #727cf5;
   transition: width 0.3s ease;
+}
+.idea-submit{
+  background-color: #1666f7;
+  padding: 3px 6px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  color: #fff !important;
+}
+.cancel-idea-form{
+ background-color: #ba0c2f;
+ padding: 3px 6px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  color: #fff !important;
+}
+.save-as-draft{
+  background-color: #f5ce5b;
+  padding: 5px 10px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  color: #fff !important;
+}
+.idea-submit:hover{
+    background-color: #082959 !important;
+}
+.cancel-idea-form:hover{
+    background-color: #860a23 !important;
+}
+.save-as-draft:hover{
+    background-color: #deae1f !important;
 }
