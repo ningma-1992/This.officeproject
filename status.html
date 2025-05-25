@@ -69,15 +69,24 @@
                 <span class="close-button" id="modalCloseBtn">&times;</span>
                 <h3>Activity Details</h3>
                 <form id="activityDetailsForm">
-                    <label>Category: <input type="text" id="modalCategory" disabled></label>
                     <label>Department: <input type="text" id="modalDepartment" disabled></label>
                     <label>Manager: <input type="text" id="modalManager" disabled></label>
+                    <label>Category: <input type="text" id="modalCategory" disabled></label>
                     <label>Emp ID: <input type="text" id="modalEmpId" disabled></label>
-                    <label>Status: <input type="text" id="modalStatus" disabled></label>
+                    <label>Status:</label>
+                    <select
+                id="modalStatus"
+                name="department"
+                class="form__select"
+                required
+              >
+                <option value="Submitted">Submitted</option>
+                <option value="Approved">Approved</option>
+                <option value="In Review">In Review</option>
+                <option value="Rejected">Rejected</option>
+              </select>
                     <label>Votes: <input type="text" id="modalVotes" disabled></label>
                     <label>Description: <textarea id="modalDescription" disabled></textarea></label>
-                    <label>Month: <input type="text" id="modalMonth" disabled></label>
-                    <label>Submitted On: <input type="text" id="modalTimestamp" disabled></label>
                 </form>
             </div>
     </main>
