@@ -1,14 +1,19 @@
+.main-content{
+    padding: 0px ;
+}
+.header-top{
+    padding: 20px;
+}
 .card-wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 cards per row */
     gap: 24px;
-    padding: 32px 0;
+    padding: 32px;
 }
 
 .card {
-    width: 300px;
-    height: 100px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .card__title {
@@ -24,6 +29,6 @@
 }
 
 .card-leaderboard{
-    height: 300px;
+    /* height: 300px; */
     overflow-y: auto;
 }
