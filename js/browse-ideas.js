@@ -102,10 +102,10 @@ function openBrowseIdeaModal(idea) {
   document.getElementById("browseStatus").value = idea.status || "";
   document.getElementById("browseVotes").value = idea.num_of_votes || "";
   document.getElementById("browseDescription").value = idea.description || "";
-  document.getElementById("browseMonth").value = idea.month || "";
-  document.getElementById("browseTimestamp").value = new Date(
-    idea.timestamp
-  ).toLocaleString();
+  // document.getElementById("browseMonth").value = idea.month || "";
+  // document.getElementById("browseTimestamp").value = new Date(
+  //   idea.timestamp
+  // ).toLocaleString();
 
   document.getElementById("browseIdeaModal").classList.remove("hidden");
 }

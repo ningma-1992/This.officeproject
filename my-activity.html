@@ -28,7 +28,7 @@
             <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
             <li><a class="nav-link  nav-link--active" href="my-activity.html">My Activity</a></li>
             <li><a class="nav-link" href="reports.html">Reports</a></li>
-        <li><a class="nav-link" href="status.html">Status</a></li>
+            <li><a class="nav-link" href="status.html">Status</a></li>
 
         </ul>
     </nav>
@@ -37,31 +37,31 @@
     <main class="main-content">
         <div class="header-top">
             <h3>My Activity</h3>
-          </div>
-          <div class="card-container">
-        <div class="filter-bar">
-            <label for="monthFilter">Month:</label>
-            <select id="monthFilter" class="form-select">
-                <option value="">All</option>
-                <option value="january">January</option>
-                <option value="february">February</option>
-                <option value="march">March</option>
-                <option value="april">April</option>
-                <option value="may">May</option>
-                <option value="june">June</option>
-                <option value="july">July</option>
-                <option value="august">August</option>
-                <option value="september">September</option>
-                <option value="october">October</option>
-                <option value="november">November</option>
-                <option value="december">December</option>
-            </select>
         </div>
+        <div class="card-container">
+            <div class="filter-bar">
+                <label for="monthFilter">Month:</label>
+                <select id="monthFilter" class="form-select">
+                    <option value="">All</option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+            </div>
 
 
-        <div class="activity-list" id="activityList">
+            <div class="activity-list" id="activityList">
+            </div>
         </div>
-    </div>
 
 
         <div id="activityModal" class="modal hidden">
@@ -69,15 +69,15 @@
                 <span class="close-button" id="modalCloseBtn">&times;</span>
                 <h3>Activity Details</h3>
                 <form id="activityDetailsForm">
-                    <label>Category: <input type="text" id="modalCategory" disabled></label>
                     <label>Department: <input type="text" id="modalDepartment" disabled></label>
                     <label>Manager: <input type="text" id="modalManager" disabled></label>
-                    <label>Emp ID: <input type="text" id="modalEmpId" disabled></label>
+                    <label>Category: <input type="text" id="modalCategory" disabled></label>
+                    <!-- <label>Emp ID: <input type="text" id="modalEmpId" disabled></label> -->
                     <label>Status: <input type="text" id="modalStatus" disabled></label>
                     <label>Votes: <input type="text" id="modalVotes" disabled></label>
                     <label>Description: <textarea id="modalDescription" disabled></textarea></label>
-                    <label>Month: <input type="text" id="modalMonth" disabled></label>
-                    <label>Submitted On: <input type="text" id="modalTimestamp" disabled></label>
+                    <!-- <label>Month: <input type="text" id="modalMonth" disabled></label>
+                    <label>Submitted On: <input type="text" id="modalTimestamp" disabled></label> -->
                 </form>
             </div>
     </main>

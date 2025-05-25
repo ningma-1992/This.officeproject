@@ -97,12 +97,12 @@ function openActivityModal(activity) {
   document.getElementById('modalCategory').value = activity.category || '';
   document.getElementById('modalDepartment').value = activity.department || '';
   document.getElementById('modalManager').value = activity.manager || '';
-  document.getElementById('modalEmpId').value = activity.empId || '';
+  // document.getElementById('modalEmpId').value = activity.empId || '';
   document.getElementById('modalStatus').value = activity.status || '';
   document.getElementById('modalVotes').value = activity.num_of_votes || '';
   document.getElementById('modalDescription').value = activity.description || '';
-  document.getElementById('modalMonth').value = activity.month || '';
-  document.getElementById('modalTimestamp').value = new Date(activity.timestamp).toLocaleString();
+  // document.getElementById('modalMonth').value = activity.month || '';
+  // document.getElementById('modalTimestamp').value = new Date(activity.timestamp).toLocaleString();
 
   document.getElementById('activityModal').classList.remove('hidden');
 };
