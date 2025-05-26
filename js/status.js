@@ -63,12 +63,6 @@
 
 // renderActivities();
 
-let currentEditingIdeaId = null;
-
-function getAllIdeas() {
-  return JSON.parse(localStorage.getItem("ideas")) || [];
-}
-
 function renderActivities(filterMonth = "") {
   const activityContainer = document.getElementById("activityList");
   activityContainer.innerHTML = "";
