@@ -1,91 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Browse Ideas | IdeaHub Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/browse-ideas.css" />
-    <link rel="stylesheet" href="css/index.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Browse Ideas | IdeaHub Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/browse-ideas.css" />
+  <link rel="stylesheet" href="css/index.css" />
 
-  <body>
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
-      <div class="logo">
-        <img src="assets/logo.svg" alt="IdeaHub Logo" />
-      </div>
-      <ul class="links-wrapper">
-        <li><a class="nav-link" href="index.html">Home</a></li>
-        <li>
-          <a class="nav-link nav-link--active" href="browse-ideas.html"
-            >Browse Ideas</a
-          >
-        </li>
-        <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
-        <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
-        <li><a class="nav-link" href="reports.html">Reports</a></li>
-        <li><a class="nav-link" href="status.html">Status</a></li>
-      </ul>
-    </nav>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <div class="header-top">
-        <h3>Browse Ideas</h3>
-      </div>
+</head>
 
-      <div class="card-container"></div>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="IdeaHub Logo" />
+    </div>
+    <ul class="links-wrapper">
+      <li><a class="nav-link" href="index.html">Home</a></li>
+      <li>
+        <a class="nav-link nav-link--active" href="browse-ideas.html">Browse Ideas</a>
+      </li>
+      <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
+      <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
+      <li><a class="nav-link" href="reports.html">Reports</a></li>
+      <li><a class="nav-link" href="status.html">Status</a></li>
+    </ul>
+  </nav>
 
-      <div id="browseIdeaModal" class="modal hidden">
-        <div class="modal-content">
-          <span class="close-button" id="browseModalCloseBtn">&times;</span>
-          <h3>Idea Details</h3>
-          <form id="browseIdeaForm">
-            <label
-              >Submitted By: <input type="text" id="browseUserName" disabled
-            /></label>
-            <label
-              >Department: <input type="text" id="browseDepartment" disabled
-            /></label>
-            <label
-              >Manager: <input type="text" id="browseManager" disabled
-            /></label>
-            <label>
-              Category: <input type="text" id="browseCategory" disabled />
-            </label>
-            <label
-              >Status: <input type="text" id="browseStatus" disabled
-            /></label>
-            <label
-              >Votes: <input type="text" id="browseVotes" disabled
-            /></label>
-            <label
-              >Description:
-              <textarea id="browseDescription" disabled></textarea>
-            </label>
-            <!-- <label
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <div class="header-top">
+      <h3>Browse Ideas</h3>
+    </div>
+
+    <div class="card-container"></div>
+
+    <!-- <div id="browseIdeaModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" id="browseModalCloseBtn">&times;</span>
+        <h3>Idea Details</h3>
+        <form id="browseIdeaForm">
+          <label>Submitted By: <input type="text" id="browseUserName" disabled /></label>
+          <label>Department: <input type="text" id="browseDepartment" disabled /></label>
+          <label>Manager: <input type="text" id="browseManager" disabled /></label>
+          <label>
+            Category: <input type="text" id="browseCategory" disabled />
+          </label>
+          <label>Status: <input type="text" id="browseStatus" disabled /></label>
+          <label>Votes: <input type="text" id="browseVotes" disabled /></label>
+          <label>Description:
+            <textarea id="browseDescription" disabled></textarea>
+          </label>
+          <label
               >Month: <input type="text" id="browseMonth" disabled
             /></label>
             <label
               >Submitted On: <input type="text" id="browseTimestamp" disabled
-            /></label> -->
-          </form>
-        </div>
+            /></label>
+        </form>
       </div>
-    </main>
+    </div> -->
 
-    <script src="js/common.js"></script>
-    <script src="js/browse-ideas.js"></script>
-  </body>
+    <!-- experiment -->
+
+
+
+    <!-- <div id="browseIdeaModal"
+      class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"> -->
+    <div id="browseIdeaModal"
+      class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative">
+        <!-- <span class="close-button" id="browseModalCloseBtn">&times;</span> -->
+        <button id="browseModalCloseBtn"
+          class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
+
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">Idea Details</h2>
+        <div class="mb-2">
+          <span class="font-semibold text-gray-700">Submitted By:</span> <span id="browseUserName"></span>
+          (<span id="browseEmpId"></span>)
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold text-gray-700">Department:</span> <span id="browseDepartment"></span>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold text-gray-700">Manager:</span> <span id="browseManager"></span>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold text-gray-700">Category:</span> <span id="browseCategory"></span>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold text-gray-700">Status:</span> <span id="browseStatus"></span>
+        </div>
+        <div class="mb-4">
+          <span class="font-semibold text-gray-700">Votes:</span> <span id="browseVotes"></span>
+        </div>
+        <div>
+          <span class="font-semibold text-gray-700">Description:</span>
+          <div id="browseDescription"
+            class="mt-1 max-h-40 overflow-y-auto p-3 bg-gray-100 rounded text-gray-800 text-sm">
+          </div>
+        </div>
+
+      </div>
+      <!-- <form id="browseIdeaForm"> -->
+      <!-- <label>Submitted By: <input type="text" id="browseUserName" disabled /></label> -->
+      <!-- <label>Department: <input type="text" id="browseDepartment" disabled /></label> -->
+      <!-- <label>Manager: <input type="text" id="browseManager" disabled /></label> -->
+      <!-- <label>
+            Category: <input type="text" id="browseCategory" disabled />
+          </label> -->
+      <!-- <label>Status: <input type="text" id="browseStatus" disabled /></label> -->
+      <!-- <label>Votes: <input type="text" id="browseVotes" disabled /></label>
+        <label>Description:
+          <textarea id="browseDescription" disabled></textarea>
+        </label> -->
+      <!-- </form> -->
+    </div>
+    </div>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/browse-ideas.js"></script>
+</body>
+
 </html>

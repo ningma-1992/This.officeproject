@@ -95,24 +95,25 @@ function renderIdeas() {
 }
 
 function openBrowseIdeaModal(idea) {
-  document.getElementById("browseCategory").value = idea.category || "";
-  document.getElementById("browseDepartment").value = idea.department || "";
-  document.getElementById("browseUserName").value = idea.userName || "";
-  document.getElementById("browseManager").value = idea.manager || "";
-  document.getElementById("browseStatus").value = idea.status || "";
-  document.getElementById("browseVotes").value = idea.num_of_votes || "";
-  document.getElementById("browseDescription").value = idea.description || "";
-  // document.getElementById("browseMonth").value = idea.month || "";
-  // document.getElementById("browseTimestamp").value = new Date(
+  document.getElementById("browseCategory").innerHTML = idea.category || "";
+  document.getElementById("browseDepartment").innerHTML = idea.department || "";
+  document.getElementById("browseUserName").innerHTML = idea.userName || "";
+  document.getElementById("browseEmpId").innerHTML = idea.empId || "";
+  document.getElementById("browseManager").innerHTML = idea.manager || "";
+  document.getElementById("browseStatus").innerHTML = idea.status || "";
+  document.getElementById("browseVotes").innerHTML = idea.num_of_votes || "";
+  document.getElementById("browseDescription").innerHTML =
+    idea.description || "";
+  // document.getElementById("browseMonth").innerHTML = idea.month || "";
+  // document.getElementById("browseTimestamp").innerHTML = new Date(
   //   idea.timestamp
   // ).toLocaleString();
 
   document.getElementById("browseIdeaModal").classList.remove("hidden");
 }
 
-document.getElementById('browseModalCloseBtn').addEventListener('click', () => {
-  document.getElementById('browseIdeaModal').classList.add('hidden');
+document.getElementById("browseModalCloseBtn").addEventListener("click", () => {
+  document.getElementById("browseIdeaModal").classList.add("hidden");
 });
-
 
 renderIdeas();

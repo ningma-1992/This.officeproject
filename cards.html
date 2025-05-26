@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idea Modal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Trigger Button -->
+    <button onclick="toggleModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+        Show Idea Details
+    </button>
+
+    <!-- Modal Background -->
+    <div id="ideaModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative">
+            <!-- Close Button -->
+            <button onclick="toggleModal()"
+                class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
+
+            <h2 class="text-2xl font-bold mb-4 text-blue-600">Idea Details</h2>
+
+            <div class="mb-2">
+                <span class="font-semibold text-gray-700">Submitted By:</span> Abhisek
+            </div>
+            <div class="mb-2">
+                <span class="font-semibold text-gray-700">Department:</span> CE
+            </div>
+            <div class="mb-2">
+                <span class="font-semibold text-gray-700">Manager:</span> Manager A
+            </div>
+            <div class="mb-2">
+                <span class="font-semibold text-gray-700">Category:</span> Transport
+            </div>
+            <div class="mb-2">
+                <span class="font-semibold text-gray-700">Status:</span> Submitted
+            </div>
+            <div class="mb-4">
+                <span class="font-semibold text-gray-700">Votes:</span> 5
+            </div>
+
+            <div>
+                <span class="font-semibold text-gray-700">Description:</span>
+                <div class="mt-1 max-h-40 overflow-y-auto p-3 bg-gray-100 rounded text-gray-800 text-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("ideaModal");
+            modal.classList.toggle("hidden");
+        }
+    </script>
+</body>
+
+</html>
