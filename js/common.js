@@ -4,18 +4,18 @@ const DRAFT_IDEAS_LS_KEY = "drafts";
 function getAllIdeas() {
   try {
     const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
-    console.log('ideas22',ideas)
+    console.log("ideas22", ideas);
     return ideas;
   } catch (error) {
     console.error("Error getting ideas:", error);
     return [];
   }
-};
+}
 
 function getAllDrafts() {
   try {
     const drafts = JSON.parse(localStorage.getItem(DRAFT_IDEAS_LS_KEY)) || [];
-    console.log('drafts',drafts)
+    console.log("drafts", drafts);
     return drafts;
   } catch (error) {
     console.error("Error getting drafts:", error);
@@ -30,11 +30,11 @@ function addIdea(
   department,
   category,
   description,
-  status = "Rejected"
+  status = "Submitted"
 ) {
-  const num_of_votes = 30;
+  const num_of_votes = 0;
   const voted = false;
-  const month = "february"; // curently we are using this field to show the data monyh wise, but later on by timestamp we will filter the data
+  const month = "march"; // curently we are using this field to show the data monyh wise, but later on by timestamp we will filter the data
   const newIdea = {
     id: Date.now(),
     userName,
@@ -54,7 +54,7 @@ function addIdea(
   allIdeas.unshift(newIdea);
   localStorage.setItem(IDEAS_LS_KEY, JSON.stringify(allIdeas));
   return newIdea;
-};
+}
 
 function saveDraft(
   userName,
