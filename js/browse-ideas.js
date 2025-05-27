@@ -1,119 +1,104 @@
-function renderIdeas() {
-  const ideasContainer = document.querySelector(".card-container");
-  ideasContainer.innerHTML = ""; // Clear previous content
 
-  const ideas = getAllIdeas();
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.querySelector(".card-container");
 
-  if (Array.isArray(ideas)) {
-    // ideas.forEach((idea, index) => {
-    //     const ideaCard = document.createElement('div');
-    //     ideaCard.className = 'card';
-    //     ideaCard.innerHTML = `
-    //         <div class="card__title-row">
-    //             <div class="count-badge count-badge__primary">${idea.category}</div>
-    //             <span class="badge">${idea.status}</span>
-    //         </div>
-    //         <h3 class="card__title">${idea.department}</h3>
-    //         <div class="card__body">
-    //             <p>${idea.userName}</p>
-    //             <p>Manager: ${idea.manager}</p>
-    //         </div>
-    //         <div class="card__body">
-    //             <p>
-    //                 <button class="vote-btn" data-index="${index}">
-    //                     ${idea.voted ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>'}
-    //                 </button>
-    //                 <span class="vote-count">(${idea.num_of_votes})</span>
-    //             </p>
-    //         </div>
-    //     `;
-
-    //     ideasContainer.appendChild(ideaCard);
-    // });
-
-    // Attach click handlers AFTER appending to DOM
-
-    ideas.forEach((idea, index) => {
-      const ideaCard = document.createElement("div");
-      ideaCard.className = "card";
-      ideaCard.innerHTML = `
-    <div class="card__title-row">
-      <div class="count-badge count-badge__primary">${idea.category}</div>
-      <span class="badge">${idea.status}</span>
-    </div>
-    <h3 class="card__title">${idea.department}</h3>
-    <div class="card__body">
-      <p>${idea.userName}</p>
-      <p>Manager: ${idea.manager}</p>
-    </div>
-    <div class="card__body">
-      <p>
-        <button class="vote-btn" data-index="${index}">
-          ${
-            idea.voted
-              ? '<i class="fa-solid fa-thumbs-up"></i>'
-              : '<i class="fa-regular fa-thumbs-up"></i>'
-          }
-        </button>
-        <span class="vote-count">(${idea.num_of_votes})</span>
-      </p>
-    </div>
-  `;
-
-      // 🟡 Show idea detail modal when clicking the card
-      ideaCard.addEventListener("click", (e) => {
-        // Avoid opening modal if vote button is clicked
-        if (!e.target.closest(".vote-btn")) {
-          openBrowseIdeaModal(idea);
+    function getAllIdeas() {
+        try {
+            const ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+            return ideas;
+        } catch (error) {
+            console.error("Error getting ideas:", error);
+            return [];
         }
-      });
+    }
 
-      ideasContainer.appendChild(ideaCard);
-    });
+    function groupIdeasByCategory(ideas) {
+        return ideas.reduce((groups, idea) => {
+            const category = idea.category || "Uncategorized";
+            if (!groups[category]) {
+                groups[category] = [];
+            }
+            groups[category].push(idea);
+            return groups;
+        }, {});
+    }
 
-    document.querySelectorAll(".vote-btn").forEach((button) => {
-      button.addEventListener("click", function () {
-        const idx = parseInt(this.getAttribute("data-index"));
-        const ideas = getAllIdeas(); // Get latest ideas from storage
+    function createCard(idea) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="card__title-row">
+                <div class="count-badge count-badge__primary">${idea.category || "Uncategorized"}</div>
+                <span class="badge">${idea.status}</span>
+            </div>
+            <h3 class="card__title">${idea.department}</h3>
+            <div class="card__body">
+                <p>${idea.userName}</p>
+                <p>Manager: ${idea.manager}</p>
+                <p><strong>Description:</strong> ${idea.description}</p>
+            </div>
+        `;
+        return card;
+    }
 
-        if (!ideas[idx].voted) {
-          ideas[idx].voted = true;
-          ideas[idx].num_of_votes += 1;
-        } else {
-          ideas[idx].voted = false;
-          ideas[idx].num_of_votes -= 1;
+    function renderCategoryBoxes() {
+        const ideas = getAllIdeas();
+        const groupedIdeas = groupIdeasByCategory(ideas);
+        container.innerHTML = "";
+
+        for (const category in groupedIdeas) {
+            const box = document.createElement("div");
+            box.className = "category-box";
+            box.setAttribute("data-category", category);
+            box.style.border = "2px solid #007bff";
+            box.style.marginBottom = "20px";
+            box.style.padding = "20px";
+            box.style.borderRadius = "10px";
+            box.style.backgroundColor = "#f0f8ff";
+            box.style.cursor = "pointer";
+
+            const header = document.createElement("h3");
+            header.textContent = `${category} (${groupedIdeas[category].length})`;
+            header.style.color = "#0056b3";
+
+            const preview = document.createElement("p");
+            preview.textContent = "Click to view all ideas";
+            preview.style.fontStyle = "italic";
+            preview.style.color = "#777";
+
+            box.appendChild(header);
+            box.appendChild(preview);
+
+            box.addEventListener("click", () => {
+                renderIdeasFromCategory(category);
+            });
+
+            container.appendChild(box);
         }
+    }
 
-        // Save updated ideas back to localStorage
-        localStorage.setItem("ideas", JSON.stringify(ideas));
+    function renderIdeasFromCategory(category) {
+        const ideas = getAllIdeas().filter(idea => idea.category === category);
+        container.innerHTML = "";
 
-        // Re-render UI
-        renderIdeas();
-      });
-    });
-  }
-}
+        const backBtn = document.createElement("button");
+        backBtn.textContent = "← Back to All Categories";
+        backBtn.style.marginBottom = "20px";
+        backBtn.style.padding = "10px";
+        backBtn.style.border = "1px solid #ccc";
+        backBtn.style.borderRadius = "5px";
+        backBtn.style.cursor = "pointer";
+        backBtn.addEventListener("click", () => {
+            renderCategoryBoxes();
+        });
 
-function openBrowseIdeaModal(idea) {
-  document.getElementById("browseCategory").innerHTML = idea.category || "";
-  document.getElementById("browseDepartment").innerHTML = idea.department || "";
-  document.getElementById("browseUserName").innerHTML = idea.userName || "";
-  document.getElementById("browseEmpId").innerHTML = idea.empId || "";
-  document.getElementById("browseManager").innerHTML = idea.manager || "";
-  document.getElementById("browseStatus").innerHTML = idea.status || "";
-  document.getElementById("browseVotes").innerHTML = idea.num_of_votes || "";
-  document.getElementById("browseDescription").innerHTML =
-    idea.description || "";
-  // document.getElementById("browseMonth").innerHTML = idea.month || "";
-  // document.getElementById("browseTimestamp").innerHTML = new Date(
-  //   idea.timestamp
-  // ).toLocaleString();
+        container.appendChild(backBtn);
 
-  document.getElementById("browseIdeaModal").classList.remove("hidden");
-}
+        ideas.forEach(idea => {
+            const ideaCard = createCard(idea);
+            container.appendChild(ideaCard);
+        });
+    }
 
-document.getElementById("browseModalCloseBtn").addEventListener("click", () => {
-  document.getElementById("browseIdeaModal").classList.add("hidden");
+    renderCategoryBoxes();
 });
-
-renderIdeas();
