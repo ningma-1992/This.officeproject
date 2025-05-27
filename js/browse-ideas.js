@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function createCard(idea) {
         const card = document.createElement("div");
         card.className = "card";
+
         card.innerHTML = `
             <div class="card__title-row">
                 <div class="count-badge count-badge__primary">${idea.category || "Uncategorized"}</div>
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p><strong>Description:</strong> ${idea.description}</p>
             </div>
         `;
+
         return card;
     }
 
@@ -48,26 +50,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (const category in groupedIdeas) {
             const box = document.createElement("div");
-            box.className = "category-box";
+            box.className = "card"; // using same class as original card
             box.setAttribute("data-category", category);
-            box.style.border = "2px solid #007bff";
-            box.style.marginBottom = "20px";
-            box.style.padding = "20px";
-            box.style.borderRadius = "10px";
-            box.style.backgroundColor = "#f0f8ff";
-            box.style.cursor = "pointer";
 
             const header = document.createElement("h3");
             header.textContent = `${category} (${groupedIdeas[category].length})`;
-            header.style.color = "#0056b3";
+            header.className = "card__title";
+            header.style.cursor = "pointer";
+            header.style.color = "black";
 
-            const preview = document.createElement("p");
-            preview.textContent = "Click to view all ideas";
-            preview.style.fontStyle = "italic";
-            preview.style.color = "#777";
+            const previewList = document.createElement("div");
+            previewList.className = "card__body";
+
+            groupedIdeas[category].slice(0, 2).forEach(idea => {
+                const preview = document.createElement("p");
+                preview.innerHTML = `
+                    <strong>${idea.description}</strong><br/>
+                    <small>By ${idea.userName}</small>
+                `;
+                previewList.appendChild(preview);
+            });
+
+            const clickHint = document.createElement("p");
+            clickHint.textContent = "Click to view all ideas";
+            clickHint.className = "card__body";
+            clickHint.style.fontStyle = "italic";
+            clickHint.style.color = "#777";
 
             box.appendChild(header);
-            box.appendChild(preview);
+            box.appendChild(previewList);
+            box.appendChild(clickHint);
 
             box.addEventListener("click", () => {
                 renderIdeasFromCategory(category);
