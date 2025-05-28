@@ -105,7 +105,7 @@ function showAlert(type = "success", message = "") {
     <button class="alert__close" aria-label="Close alert">&times;</button>
   `;
 
-  // Append to body
+  //Append to body
   document.body.appendChild(alert);
 
   // Close button handler
