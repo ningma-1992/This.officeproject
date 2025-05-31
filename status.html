@@ -1,100 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>My Activity | IdeaHub Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/my-activity.css">
-    <link rel="stylesheet" href="css/index.css" />
-
-</head>
-
-<body> -->
-
-<!-- Sidebar Navigation -->
-<!-- <nav class="sidebar">
-        <div class="logo">
-            <img src="assets/logo.svg" alt="IdeaHub Logo" />
-        </div>
-        <ul class="links-wrapper">
-            <li><a class="nav-link" href="index.html">Home</a></li>
-            <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
-            <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
-            <li><a class="nav-link " href="my-activity.html">My Activity</a></li>
-            <li><a class="nav-link" href="reports.html">Reports</a></li>
-            <li><a class="nav-link nav-link--active" href="status.html">Status</a></li>
-
-        </ul>
-    </nav> -->
-
-<!-- Main Content Area -->
-<!-- <main class="main-content">
-        <div class="header-top">
-            <h3>My Activity</h3>
-        </div>
-        <div class="card-container">
-            <div class="filter-bar">
-                <label for="monthFilter">Month:</label>
-                <select id="monthFilter" class="form-select">
-                    <option value="">All</option>
-                    <option value="january">January</option>
-                    <option value="february">February</option>
-                    <option value="march">March</option>
-                    <option value="april">April</option>
-                    <option value="may">May</option>
-                    <option value="june">June</option>
-                    <option value="july">July</option>
-                    <option value="august">August</option>
-                    <option value="september">September</option>
-                    <option value="october">October</option>
-                    <option value="november">November</option>
-                    <option value="december">December</option>
-                </select>
-            </div>
-
-
-            <div class="activity-list" id="activityList">
-            </div>
-        </div>
-
-
-        <div id="activityModal" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-button" id="modalCloseBtn">&times;</span>
-                <h3>Activity Details</h3>
-                <form id="activityDetailsForm">
-                    <label>Department: <input type="text" id="modalDepartment" disabled></label>
-                    <label>Manager: <input type="text" id="modalManager" disabled></label>
-                    <label>Category: <input type="text" id="modalCategory" disabled></label>
-                    <label>Emp ID: <input type="text" id="modalEmpId" disabled></label>
-                    <label>Status:</label>
-                    <select id="modalStatus" name="department" class="form__select" required>
-                        <option value="Submitted">Submitted</option>
-                        <option value="Approved">Approved</option>
-                        <option value="In Review">In Review</option>
-                        <option value="Rejected">Rejected</option>
-                    </select>
-                    <label>Votes: <input type="text" id="modalVotes" disabled></label>
-                    <label>Description: <textarea id="modalDescription" disabled></textarea></label>
-                </form>
-            </div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="js/common.js"></script>
-    <script src="js/status.js"></script>
-</body>
-
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,13 +24,14 @@
             <li><a class="nav-link" href="reports.html">Reports</a></li>
             <li><a class="nav-link nav-link--active" href="status.html">Status</a></li>
             <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
-        <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
+            <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
         </ul>
     </nav>
     <main class="main-content">
         <div class="header-top">
             <h3>Status</h3>
         </div>
+        <h4>Hello Manager A</h4>
         <div class="card-container">
             <div class="filter-bar"> <label for="monthFilter">Month:</label> <select id="monthFilter"
                     class="form-select">
@@ -152,22 +56,27 @@
                 <span class="close-button" id="modalCloseBtn">&times;</span>
                 <h3>Activity Details</h3>
                 <form id="activityDetailsForm">
+                    <label>Emp Name: <input type="text" id="modalEmpName" disabled /></label>
                     <label>Emp ID: <input type="text" id="modalEmpId" disabled /></label>
                     <!-- <label>Emp ID: <span id="modalEmpId2"></span> -->
-                    <label>Emp Name: <input type="text" id="modalEmpName" disabled /></label>
                     <!-- <label>Department: <input type="text" id="modalDepartment" disabled /></label>
                     <label>Manager: <input type="text" id="modalManager" disabled /></label> -->
                     <label>Category: <input type="text" id="modalCategory" disabled /></label>
+                    <label>Sub-Category: <input type="text" id="modalSubCategory" disabled /></label>
                     <label class="form__label">Status:
-                        <select id="modalStatus" class="form__select" required>
+                        <select id="modalStatus" class="form__select" required
+                            onchange="handleStatusChange(this.value)">
                             <option value="Submitted">Submitted</option>
-                            <option value="Approved">Approved</option>
                             <option value="In Review">In Review</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Approved">Approved</option>
                             <option value="Rejected">Rejected</option>
                         </select>
                     </label>
                     <label>Votes: <input type="text" id="modalVotes" disabled /></label>
                     <label>Description: <textarea id="modalDescription" disabled></textarea></label>
+                    <label id="feedbackLabel" style="display: none;">Feedback: <textarea
+                            id="modalFeedback"></textarea></label>
                     <div style="margin-top: 1rem;">
                         <button type="button" id="updateStatusBtn" class="btn btn-primary idea-submit">Update
                             Status</button>
