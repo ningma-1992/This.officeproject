@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Ideas | IdeaHub Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/my-ideas.css" />
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
 
-  <body>
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
-      <div class="logo">
-        <img src="assets/logo.svg" alt="IdeaHub Logo" />
-      </div>
-      <ul class="links-wrapper">
-        <li><a class="nav-link" href="index.html">Home</a></li>
-        <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
-        <li>
-          <a class="nav-link nav-link--active" href="my-ideas.html"
-            >My Drafts</a
-          >
-        </li>
-        <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
-        <li><a class="nav-link" href="reports.html">Reports</a></li>
-        <li><a class="nav-link" href="status.html">Status</a></li>
-        <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
-        <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <title>My Ideas | IdeaHub Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/my-ideas.css" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
 
-      </ul>
-    </nav>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="IdeaHub Logo" />
+    </div>
+    <ul class="links-wrapper">
+      <li><a class="nav-link" href="index.html">Home</a></li>
+      <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
+      <li>
+        <a class="nav-link nav-link--active" href="my-ideas.html">My Drafts</a>
+      </li>
+      <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
+      <li><a class="nav-link" href="reports.html">Reports</a></li>
+      <li><a class="nav-link" href="status.html">Status-M</a></li>
+      <li><a class="nav-link" href="sm_status.html">Status-SM</a></li>
+      <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
+      <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <div class="header-top">
-        <h3>My Ideas</h3>
-      </div>
-      <div class="card-container"></div>
+    </ul>
+  </nav>
 
-      <!-- <div id="editIdeaModal" class="modal hidden">
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <div class="header-top">
+      <h3>My Ideas</h3>
+    </div>
+    <div class="card-container"></div>
+
+    <!-- <div id="editIdeaModal" class="modal hidden">
         <div class="modal-content">
           <span class="close-button" id="editModalCloseBtn">&times;</span>
           <h3>Edit Idea</h3>
@@ -63,132 +61,92 @@
         </div>
       </div> -->
 
-      <div class="modal" id="myModal">
-        <div class="modal__overlay"></div>
-        <div class="modal__content">
-          <button
-            id="close-idea-form"
-            class="modal__close"
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
-          <h2 class="modal__title">Submit Your Idea</h2>
+    <div class="modal" id="myModal">
+      <div class="modal__overlay"></div>
+      <div class="modal__content">
+        <button id="close-idea-form" class="modal__close" aria-label="Close modal">
+          &times;
+        </button>
+        <h2 class="modal__title">Submit Your Idea</h2>
 
-          <form class="form" id="idea-form">
-            <div class="form__row">
-              <div class="form__group">
-                <label for="userName" class="form__label">Your Name</label>
-                <input
-                  type="text"
-                  id="userName"
-                  name="userName"
-                  class="form__input"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-
-              <div class="form__group">
-                <label for="empId" class="form__label">Employee ID</label>
-                <input
-                  type="text"
-                  id="empId"
-                  name="empId"
-                  class="form__input"
-                  placeholder="Enter your employee ID"
-                  required
-                />
-              </div>
-            </div>
+        <form class="form" id="idea-form">
+          <div class="form__row">
             <div class="form__group">
-              <label for="department" class="form__label">Department</label>
-              <select
-                id="department"
-                name="department"
-                class="form__select"
-                required
-              >
-                <option value="">Select Department</option>
-                <option value="CE">CE</option>
-                <option value="CP">CP</option>
-                <option value="GRS">GRS</option>
-                <option value="IC">IC</option>
-                <option value="CQT">CQT</option>
-              </select>
+              <label for="userName" class="form__label">Your Name</label>
+              <input type="text" id="userName" name="userName" class="form__input" placeholder="Enter your name"
+                required />
             </div>
 
             <div class="form__group">
-              <label for="manager" class="form__label">Manager</label>
-              <select id="manager" name="manager" class="form__select" required>
-                <option value="">Select Manager</option>
-                <option value="Manager A">Manager A</option>
-                <option value="Manager B">Manager B</option>
-                <option value="Manager C">Manager C</option>
-                <option value="Manager D">Manager D</option>
-              </select>
+              <label for="empId" class="form__label">Employee ID</label>
+              <input type="text" id="empId" name="empId" class="form__input" placeholder="Enter your employee ID"
+                required />
             </div>
-            <div class="form__group">
-              <label for="category" class="form__label">Category</label>
-              <select
-                id="category"
-                name="category"
-                class="form__select"
-                required
-              >
-                <option value="">Select Category</option>
-                <option value="Transport">Transport</option>
-                <option value="Facility">Facility</option>
-                <option value="Operation">Operation</option>
-                <option value="Technology">Technology</option>
-              </select>
-            </div>
+          </div>
+          <div class="form__group">
+            <label for="department" class="form__label">Department</label>
+            <select id="department" name="department" class="form__select" required>
+              <option value="">Select Department</option>
+              <option value="CE">CE</option>
+              <option value="CP">CP</option>
+              <option value="GRS">GRS</option>
+              <option value="IC">IC</option>
+              <option value="CQT">CQT</option>
+            </select>
+          </div>
 
-            <div class="form__group">
-              <label for="description" class="form__label">Description</label>
-              <textarea
-                id="description"
-                name="description"
-                class="form__textarea"
-                placeholder="Detailed Description (Minimum 50 characters)"
-                rows="4"
-                required
-              ></textarea>
-            </div>
-            <div class="form__group">
-              <label for="attachment" class="form__label">Attachment</label>
-              <input
-                type="file"
-                id="attachment"
-                name="attachment"
-                class="form__input"
-                placeholder="Enter your attachment"
-              />
-            </div>
+          <div class="form__group">
+            <label for="manager" class="form__label">Manager</label>
+            <select id="manager" name="manager" class="form__select" required>
+              <option value="">Select Manager</option>
+              <option value="Manager A">Manager A</option>
+              <option value="Manager B">Manager B</option>
+              <option value="Manager C">Manager C</option>
+              <option value="Manager D">Manager D</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="category" class="form__label">Category</label>
+            <select id="category" name="category" class="form__select" required>
+              <option value="">Select Category</option>
+              <option value="Transport">Transport</option>
+              <option value="Facility">Facility</option>
+              <option value="Operation">Operation</option>
+              <option value="Technology">Technology</option>
+            </select>
+          </div>
 
-            <div class="modal__footer">
-              <button type="button" class="btn btn--outline save-as-draft" id="save-as-draft">
-                Save
-              </button>
-              <button
-                type="button"
-                class="btn btn--outline cancel-idea-form"
-                id="cancel-idea-form"
-              >
-                Cancel
-              </button>
-              <button type="submit" class="btn btn--primary idea-submit" id="idea-submit">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
+          <div class="form__group">
+            <label for="description" class="form__label">Description</label>
+            <textarea id="description" name="description" class="form__textarea"
+              placeholder="Detailed Description (Minimum 50 characters)" rows="4" required></textarea>
+          </div>
+          <div class="form__group">
+            <label for="attachment" class="form__label">Attachment</label>
+            <input type="file" id="attachment" name="attachment" class="form__input"
+              placeholder="Enter your attachment" />
+          </div>
+
+          <div class="modal__footer">
+            <button type="button" class="btn btn--outline save-as-draft" id="save-as-draft">
+              Save
+            </button>
+            <button type="button" class="btn btn--outline cancel-idea-form" id="cancel-idea-form">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn--primary idea-submit" id="idea-submit">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Edit Modal -->
+  <!-- Edit Modal -->
 
-    <script src="js/common.js"></script>
-    <script src="js/my-ideas.js"></script>
-  </body>
+  <script src="js/common.js"></script>
+  <script src="js/my-ideas.js"></script>
+</body>
+
 </html>

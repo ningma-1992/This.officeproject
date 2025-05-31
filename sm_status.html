@@ -22,8 +22,8 @@
             <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
             <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
             <li><a class="nav-link" href="reports.html">Reports</a></li>
-            <li><a class="nav-link nav-link--active" href="status.html">Status-M</a></li>
-            <li><a class="nav-link " href="sm_status.html">Status-SM</a></li>
+            <li><a class="nav-link" href="status.html">Status-M</a></li>
+            <li><a class="nav-link nav-link--active" href="sm_status.html">Status-SM</a></li>
             <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
             <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
         </ul>
@@ -62,7 +62,14 @@
                     <!-- <label>Emp ID: <span id="modalEmpId2"></span> -->
                     <!-- <label>Department: <input type="text" id="modalDepartment" disabled /></label>
                     <label>Manager: <input type="text" id="modalManager" disabled /></label> -->
-                    <!-- <label>Category: <input type="text" id="modalCategory" /></label> -->
+                    <label class="form__label">Manager:
+                        <select id="modalManager" class="form__select" required>
+                            <option value="Manaager A">Manaager A</option>
+                            <option value="Manaager B">Manaager B</option>
+                            <option value="Manaager C">Manaager C</option>
+                            <option value="Manaager D">Manaager D</option>
+                        </select>
+                    </label>
                     <label class="form__label">Category:
                         <select id="modalCategory" class="form__select" required>
                             <option value="Transport">Transport</option>

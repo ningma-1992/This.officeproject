@@ -20,7 +20,9 @@ function handleFormSubmit(event) {
     idea.manager,
     idea.department,
     idea.category,
-    idea.description
+    idea.sub_category,
+    idea.description,
+    idea.timeline
   );
   showAlert("success", "Idea submitted successfully!");
   form.reset();
@@ -175,6 +177,47 @@ function showLeaderboard() {
     }</div>
   `;
 }
+function showAgingStatus() {
+  const ideas = JSON.parse(localStorage.getItem(IDEAS_LS_KEY)) || [];
+
+  // Sort ideas by num_of_votes in descending order
+  const sortedIdeas = ideas
+    .filter((idea) => typeof idea.num_of_votes === "number")
+    .sort((a, b) => b.num_of_votes - a.num_of_votes);
+
+  const wrapper = document.querySelector(".card-wrapper");
+
+  // Look for or create the leaderboard card
+  let card = wrapper.querySelector(".card-agingStatus");
+
+  if (!card) {
+    card = document.createElement("div");
+    card.className = "card card-agingStatus";
+    wrapper.appendChild(card);
+  }
+
+  // Generate leaderboard HTML
+  const leaderboardHTML = sortedIdeas
+    .map(
+      (idea, index) => `
+    <div>
+      <strong class="leaderboard-index">#${index + 1}</strong> ${
+        idea.userName
+      } (${idea.num_of_votes} votes)
+    </div>
+  `
+    )
+    .join("");
+
+  card.innerHTML = `
+    <h3 class="heading-count-icon"><span class="home-icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="20" height="20">
+  <path fill="#fff" d="m10.427,3.971l-1.437-1.391,2.499-2.58h1.51v7h-2v-3.62l-.573.591Zm-4.427,5.029h-2.405c1.145-.65,2.405-1.485,2.405-3,0-1.654-1.346-3-3-3S0,4.346,0,6h2c0-.552.449-1,1-1s1,.448,1,1c0,.484-.944,1.012-1.702,1.435-1.077.601-2.298,1.282-2.298,2.565v1h6v-2Zm18,2.5c0-.72-.306-1.369-.794-1.825.187-.35.294-.75.294-1.175,0-1.379-1.122-2.5-2.5-2.5h-3v2h3c.276,0,.5.225.5.5s-.224.5-.5.5h-1v2h1.5c.276,0,.5.225.5.5s-.224.5-.5.5h-3.5v2h3.5c1.378,0,2.5-1.121,2.5-2.5Zm0,7v5.5H0v-8.5c0-1.379,1.122-2.5,2.5-2.5h4c.171,0,.338.017.5.05v-1.55c0-1.379,1.122-2.5,2.5-2.5h5c1.378,0,2.5,1.121,2.5,2.5v4.55c.162-.033.329-.05.5-.05h4c1.378,0,2.5,1.121,2.5,2.5Zm-15,3.5h6v-10.5c0-.275-.224-.5-.5-.5h-5c-.276,0-.5.225-.5.5v10.5Zm-7,0h5v-6.5c0-.275-.224-.5-.5-.5H2.5c-.276,0-.5.225-.5.5v6.5Zm20-3.5c0-.275-.224-.5-.5-.5h-4c-.276,0-.5.225-.5.5v3.5h5v-3.5Z"/>
+</svg></span>Leaderboard</h3>
+    <div class="leaderboard-chart">${
+      leaderboardHTML || "<p>No votes yet.</p>"
+    }</div>
+  `;
+}
 
 // Function to check if the "Add Sample Data" button should be displayed
 function addDataButtonVisibility() {
@@ -192,6 +235,7 @@ totalIdeas();
 totalApprovedIdeas();
 totalRejectedIdeas();
 showLeaderboard();
+showAgingStatus();
 
 document.addEventListener("DOMContentLoaded", function () {
   // renderCards();

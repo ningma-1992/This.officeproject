@@ -28,7 +28,8 @@
             <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
             <li><a class="nav-link  nav-link--active" href="my-activity.html">My Activity</a></li>
             <li><a class="nav-link" href="reports.html">Reports</a></li>
-            <li><a class="nav-link" href="status.html">Status</a></li>
+            <li><a class="nav-link" href="status.html">Status-M</a></li>
+            <li><a class="nav-link" href="sm_status.html">Status-SM</a></li>
             <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
             <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
         </ul>
@@ -76,9 +77,12 @@
                     <!-- <label>Emp ID: <input type="text" id="modalEmpId" disabled></label> -->
                     <label>Status: <input type="text" id="modalStatus" disabled></label>
                     <label>Votes: <input type="text" id="modalVotes" disabled></label>
-                    <label>Description: <textarea id="modalDescription" disabled="false"></textarea></label>
+                    <label id="feedbackLabel">Feedback: <textarea id="modalFeedback" disabled></textarea></label>
+                    <label>Description: <textarea id="modalDescription" disabled></textarea></label>
                     <!-- <label>Month: <input type="text" id="modalMonth" disabled></label>
                     <label>Submitted On: <input type="text" id="modalTimestamp" disabled></label> -->
+                    <button style="display: none;" type="button" id="reSubmit"
+                        class="btn btn-primary idea-submit">Re-submit</button>
                 </form>
             </div>
     </main>

@@ -26,7 +26,8 @@
       <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
       <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
       <li><a class="nav-link" href="reports.html">Reports</a></li>
-      <li><a class="nav-link" href="status.html">Status</a></li>
+      <li><a class="nav-link" href="status.html">Status-M</a></li>
+      <li><a class="nav-link" href="sm_status.html">Status-SM</a></li>
       <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
       <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
     </ul>
@@ -45,6 +46,7 @@
     <div class="row card-wrapper"></div>
     <div class="card-ideasApproved"></div>
     <div class="card-ideasRejected"></div>
+    <div class="card-agingStatus"></div>
 
     <div class="modal" id="myModal">
       <div class="modal__overlay"></div>
@@ -100,7 +102,15 @@
               <option value="Technology">Technology</option>
             </select>
           </div>
-
+          <div class="form__group">
+            <label for="sub_category" class="form__label">Sub-Category</label>
+            <select id="sub_category" name="sub_category" class="form__select" required>
+              <option value="">Select Sub-Category</option>
+              <option value="Money">Money</option>
+              <option value="Quality">Quality</option>
+              <option value="Efficiency">Efficiency</option>
+            </select>
+          </div>
           <div class="form__group">
             <label for="description" class="form__label">Description</label>
             <textarea id="description" name="description" class="form__textarea"
@@ -110,6 +120,16 @@
             <label for="attachment" class="form__label">Attachment</label>
             <input type="file" id="attachment" name="attachment" class="form__input"
               placeholder="Enter your attachment" />
+          </div>
+          <div class="form__group">
+            <label for="timeline" class="form__label">Timeline</label>
+            <select id="timeline" name="timeline" class="form__select" required>
+              <option value="">Select Timeline</option>
+              <option value="7 days">1 week</option>
+              <option value="14 days">2 weeks</option>
+              <option value="21 days">3 weeks</option>
+              <option value="28 days">4 weeks</option>
+            </select>
           </div>
 
           <div class="modal__footer">
