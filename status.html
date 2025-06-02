@@ -14,26 +14,39 @@
 </head>
 
 <body>
-    <nav class="sidebar">
+    <!-- <nav class="sidebar">
         <div class="logo"><img src="assets/logo.svg" alt="IdeaHub Logo" /></div>
         <ul class="links-wrapper">
             <li><a class="nav-link" href="index.html">Home</a></li>
             <li><a class="nav-link" href="browse-ideas.html">Browse Ideas</a></li>
             <li><a class="nav-link" href="my-ideas.html">My Drafts</a></li>
             <li><a class="nav-link" href="my-activity.html">My Activity</a></li>
-            <li><a class="nav-link" href="reports.html">Reports</a></li>
-            <li><a class="nav-link nav-link--active" href="status.html">Status-M</a></li>
-            <li><a class="nav-link " href="sm_status.html">Status-SM</a></li>
             <li><a class="nav-link" href="teamReport.html">Team Reports</a></li>
             <li><a class="nav-link" href="summaryReport.html">Summary Reports</a></li>
         </ul>
-    </nav>
-    <main class="main-content">
-        <div class="header-top">
+    </nav> -->
+    <main class="main-content" style="margin-left: 0px;">
+        <div class="header-top" style="width: 100%;">
             <h3>Status</h3>
         </div>
-        <h4>Hello Manager A</h4>
         <div class="card-container">
+            <div style="display: none;" class="filter-bar"> <label for="managerFilter">Manager:</label>
+                <select id="managerFilter" class="form-select">
+                    <option value="Manager A">Manager A</option>
+                    <option value="Manager B">Manager B</option>
+                    <option value="Manager C">Manager C</option>
+                    <option value="Manager D">Manager D</option>
+                </select>
+            </div>
+            <div class="filter-bar"> <label for="statusFilter">Status:</label>
+                <select id="statusFilter" class="form-select">
+                    <option value="Submitted">Submitted</option>
+                    <option value="In Review">In Review</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Feedback">Feedback</option>
+                </select>
+            </div>
             <div class="filter-bar"> <label for="monthFilter">Month:</label> <select id="monthFilter"
                     class="form-select">
                     <option value="">All</option>
@@ -49,7 +62,8 @@
                     <option value="october">October</option>
                     <option value="november">November</option>
                     <option value="december">December</option>
-                </select> </div>
+                </select>
+            </div>
             <div class="activity-list" id="activityList"></div>
         </div>
         <div id="activityModal" class="modal hidden">
