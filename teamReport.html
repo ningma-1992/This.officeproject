@@ -30,8 +30,6 @@
             background: #f8f9fa;
         }
     </style>
-
-
 </head>
 
 <body>
@@ -53,23 +51,54 @@
 
     <!-- Main Content Area -->
     <main class="main-content2">
+	<br>
         <div class="header-top">
             <h3>Team Reports</h3>
         </div>
-        <div class="my-4 row card-wrapper-reports">
-            <div class="mb-3 col-md-3">
+
+        <!-- All four cards in a single row -->
+        <div class="row mb-4 card-wrapper-reports">
+            <div class="col-md-3 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <a href="status.html" class="card-title h5">Status</a>
                         <p id="managerACount" class="card-text">7</p>
                     </div>
+                </div>
+            </div>
 
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Total Approved</div>
+                        <p class="card-text">7</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Total Rejected</div>
+                        <p class="card-text">134</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h5">Pending</div>
+                        <p class="card-text">150</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Category / Sub-Category selectors -->
         <div class="row mb-4 card-wrapper-reports">
             <div class="col-md-6">
-                <label for="manager" class="form-label"> Category</label>
+                <label for="manager" class="form-label">Category</label>
                 <select id="manager" class="form-select">
                     <option value="" selected>Select a Category</option>
                     <option value="Transport">Transport</option>
@@ -79,44 +108,20 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="month2" class="form-label"> Sub-Category</label>
+                <label for="month2" class="form-label">Sub-Category</label>
                 <select id="month2" class="form-select">
                     <option value="" selected>Select Sub-Category</option>
-                    <option value="january">Money</option>
-                    <option value="february">Quality</option>
-                    <option value="march">Efficiency</option>
+                    <option value="Efficiency">Efficiency</option>
+                    <option value="Optimization">Optimization</option>
+                    <option value="Automation">Automation</option>
+				   <option value="january">Streamlining</option>
+
+					
                 </select>
             </div>
-            <!-- <div class="col-md-2 d-flex align-items-end justify-content-end">
-                <button class="btn btn-success" id="downloadBtn2" disabled>Export Excel</button>
-            </div> -->
         </div>
-        <div class="my-4 row card-wrapper-reports">
-            <div class="mb-3 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title h5">Total Approved</div>
-                        <p class="card-text">7</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title h5">Total Rejected</div>
-                        <p class="card-text">134</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title h5">Pending</div>
-                        <p class="card-text">150</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <!-- Data table -->
         <div class="row mb-4 card-wrapper-reports mx-1">
             <table class="table table-bordered text-center">
                 <thead class="table-light">
@@ -137,12 +142,9 @@
                 </tbody>
             </table>
         </div>
-        </div>
-
-
-
     </main>
 
+    <!-- jQuery (needed for Select2) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap JS -->
@@ -153,15 +155,14 @@
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- SheetJS (XLSX) for Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-    <!-- jsPDF for PDF -->
+    <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Your custom JS files -->
     <script src="js/common.js"></script>
     <script src="js/reports.js"></script>
     <script src="js/teamReports.js"></script>
