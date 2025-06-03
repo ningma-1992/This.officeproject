@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("ideas", JSON.stringify(ideas));
                 renderIdeasFromCategory(idea.category);
             } else {
-                alert("Aap pehle hi vote kar chuke ho!");
+                alert("You already voted!");
             }
         }
     }
