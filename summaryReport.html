@@ -24,13 +24,10 @@
   />
 
   <!-- Chart.js (for doughnut) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- SheetJS (XLSX) for Excel export -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
-    defer
-  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
   <style>
     body {
@@ -46,9 +43,7 @@
   </style>
 </head>
 <body>
-  <!-- ──────────────────────────────────────────────────── -->
   <!-- SIDEBAR (UNCHANGED) -->
-  <!-- ──────────────────────────────────────────────────── -->
   <nav class="sidebar">
     <div class="logo">
       <img src="assets/logo.svg" alt="IdeaHub Logo" />
@@ -63,14 +58,12 @@
     </ul>
   </nav>
 
-  <!-- ──────────────────────────────────────────────────── -->
-  <!-- MAIN CONTENT (original .main-content2) -->
-  <!-- ──────────────────────────────────────────────────── -->
+  <!-- MAIN CONTENT -->
   <main class="main-content2">
     <div class="header-top mb-4">
       <h3>Summary Reports</h3>
     </div>
-    <br>
+	<br>
 
     <!-- Top summary cards -->
     <div class="row mb-4 card-wrapper-reports">
@@ -102,15 +95,15 @@
         <div class="card text-center">
           <div class="card-body">
             <div class="card-title h5">Categories</div>
-            <p class="card-text">3</p>
+            <p class="card-text" id="totalCategories">3</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Manager + Month selector -->
+    <!-- Manager, Category, Subcategory & Month selector -->
     <div class="row mb-4 card-wrapper-reports">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="managerSelect" class="form-label">Select Manager:</label>
         <select id="managerSelect" class="form-select">
           <option value="" disabled selected>Select a manager</option>
@@ -121,20 +114,32 @@
           <option value="michael">Michael Brown</option>
         </select>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
+        <label for="categorySelect" class="form-label">Select Category:</label>
+        <select id="categorySelect" class="form-select" disabled>
+          <option value="" disabled selected>Select a category</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="subCategorySelect" class="form-label">Select Subcategory:</label>
+        <select id="subCategorySelect" class="form-select" disabled>
+          <option value="" disabled selected>Select a subcategory</option>
+        </select>
+      </div>
+      <div class="col-md-3">
         <label for="monthSelect" class="form-label">Select Month:</label>
         <select id="monthSelect" class="form-select" disabled>
           <option value="" disabled selected>Select a month</option>
         </select>
       </div>
-      <div class="col-md-4 d-flex align-items-end justify-content-end">
+      <div class="col-md-12 text-end mt-3">
         <button id="exportBtn" class="btn btn-success" disabled>
           Export Excel
         </button>
       </div>
     </div>
 
-    <!-- Table for showing manager/month breakdown -->
+    <!-- Table for showing manager/month/category/subcategory breakdown -->
     <div class="row mb-4 card-wrapper-reports">
       <div class="col-12">
         <table class="table table-bordered text-center">
@@ -142,53 +147,50 @@
             <tr>
               <th>Manager</th>
               <th>Month</th>
-              <th>Transport</th>
-              <th>Facility</th>
-              <th>Operation</th>
+              <th>Category</th>
+              <th>Subcategory</th>
             </tr>
           </thead>
           <tbody>
             <tr id="dataRow">
               <td id="managerName">—</td>
               <td id="monthName">—</td>
-              <td id="glands">0</td>
-              <td id="vitamins">0</td>
-              <td id="herbal">0</td>
+              <td id="categoryName">—</td>
+              <td id="subCategoryName">—</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Totals summary cards (All months for that manager) -->
+    <!-- Totals summary cards (All months for that manager/category/subcategory) -->
     <div class="row text-center mb-4 card-wrapper-reports">
       <div class="col-md-6 summary">
         <div class="card p-3 mb-3">
-          <h6>Total Submitted (Selected Months)</h6>
+          <h6>Total Submitted (All Months)</h6>
           <h4 id="totalSubmittedAll">0</h4>
         </div>
         <div class="card p-3 mb-3">
-          <h6>Approved (Selected Months)</h6>
+          <h6>Total Approved (All Months)</h6>
           <h4 id="totalApprovedAll">0</h4>
         </div>
         <div class="card p-3 mb-3">
-          <h6>In-Preview (Selected Months)</h6>
+          <h6>Total In-Preview (All Months)</h6>
           <h4 id="totalPreviewAll">0</h4>
         </div>
         <div class="card p-3 mb-3">
-          <h6>Rejected (Selected Months)</h6>
+          <h6>Total Rejected (All Months)</h6>
           <h4 id="totalRejectedAll">0</h4>
         </div>
       </div>
 
-      <!-- Totals for Selected Month + Doughnut chart -->
+      <!-- Totals for Selected Scope + Doughnut chart -->
       <div class="col-md-6">
         <div class="text-center mb-3 d-flex justify-content-between">
           <h5>
-            Total Submitted Ideas<br />
-            (Selected Month):
+            Submitted (Selected Scope): 
             <span
-              id="totalSubmittedMonth"
+              id="totalSubmittedScope"
               style="margin-left: 10px; color: #0a77d0;"
               >0</span
             >
@@ -201,179 +203,183 @@
     </div>
   </main>
 
-  <!-- ──────────────────────────────────────────────────── -->
-  <!-- JAVASCRIPT (at bottom) -->
-  <!-- ──────────────────────────────────────────────────── -->
+  <!-- JAVASCRIPT -->
   <script>
-    // ──────────────────────────────────────────────────────
-    // Data structure: manager → category → month → { submitted, status }
-    // ──────────────────────────────────────────────────────
-    const dummyData2 = {
-      john: {
-        Transport: {
-          january: {
-            submitted: { idea1: 22, idea2: 18 },
-            status: { preview: 8, approved: 25, rejected: 6 },
-          },
-          february: {
-            submitted: { idea1: 20, idea2: 17 },
-            status: { preview: 7, approved: 22, rejected: 5 },
-          },
-        },
-        Facility: {
-          january: {
-            submitted: { idea1: 25, idea2: 20 },
-            status: { preview: 10, approved: 28, rejected: 7 },
-          },
-          march: {
-            submitted: { idea1: 19, idea2: 16 },
-            status: { preview: 6, approved: 24, rejected: 4 },
-          },
-        },
-        Operation: {
-          april: {
-            submitted: { idea1: 21, idea2: 17 },
-            status: { preview: 9, approved: 26, rejected: 5 },
-          },
-        },
-      },
-      jane: {
-        Operation: {
-          january: {
-            submitted: { idea1: 24, idea2: 19 },
-            status: { preview: 8, approved: 30, rejected: 6 },
-          },
-          april: {
-            submitted: { idea1: 23, idea2: 17 },
-            status: { preview: 7, approved: 28, rejected: 5 },
-          },
-        },
-        Transport: {
-          march: {
-            submitted: { idea1: 20, idea2: 15 },
-            status: { preview: 6, approved: 25, rejected: 4 },
-          },
-        },
-        Facility: {
-          february: {
-            submitted: { idea1: 18, idea2: 16 },
-            status: { preview: 5, approved: 22, rejected: 3 },
-          },
-        },
-      },
-      mark: {
-        Transport: {
-          march: {
-            submitted: { idea1: 21, idea2: 17 },
-            status: { preview: 7, approved: 26, rejected: 5 },
-          },
-        },
-        Facility: {
-          february: {
-            submitted: { idea1: 22, idea2: 18 },
-            status: { preview: 6, approved: 24, rejected: 4 },
-          },
-        },
-        Operation: {
-          june: {
-            submitted: { idea1: 20, idea2: 17 },
-            status: { preview: 5, approved: 23, rejected: 3 },
-          },
-        },
-      },
-      sarah: {
-        Transport: {
-          january: {
-            submitted: { idea1: 18, idea2: 17 },
-            status: { preview: 5, approved: 22, rejected: 4 },
-          },
-          february: {
-            submitted: { idea1: 19, idea2: 16 },
-            status: { preview: 6, approved: 23, rejected: 5 },
-          },
-          april: {
-            submitted: { idea1: 18, idea2: 15 },
-            status: { preview: 5, approved: 21, rejected: 4 },
-          },
-        },
-        Facility: {
-          may: {
-            submitted: { idea1: 19, idea2: 15 },
-            status: { preview: 5, approved: 22, rejected: 4 },
-          },
-        },
-      },
-      michael: {
-        Operation: {
-          february: {
-            submitted: { idea1: 17, idea2: 16 },
-            status: { preview: 4, approved: 20, rejected: 3 },
-          },
-          march: {
-            submitted: { idea1: 18, idea2: 17 },
-            status: { preview: 5, approved: 22, rejected: 4 },
-          },
-          may: {
-            submitted: { idea1: 17, idea2: 15 },
-            status: { preview: 4, approved: 21, rejected: 3 },
-          },
-        },
-        Facility: {
-          june: {
-            submitted: { idea1: 19, idea2: 16 },
-            status: { preview: 5, approved: 23, rejected: 4 },
-          },
-        },
-      },
-    };
-
-    // ──────────────────────────────────────────────────────
-    // Grab references to DOM elements
-    // ──────────────────────────────────────────────────────
-    const managerSelect         = document.getElementById('managerSelect');
-    const monthSelect           = document.getElementById('monthSelect');
-    const exportBtn             = document.getElementById('exportBtn');
-
-    const managerNameEl         = document.getElementById('managerName');
-    const monthNameEl           = document.getElementById('monthName');
-    const transportEl           = document.getElementById('glands');
-    const facilityEl            = document.getElementById('vitamins');
-    const operationEl           = document.getElementById('herbal');
-
-    const totalIdeasCountEl     = document.getElementById('totalIdeasCount');
-    const totalManagersEl       = document.getElementById('totalManagers');
-    const totalMonthsEl         = document.getElementById('totalMonths');
-
-    const totalSubmittedAllEl   = document.getElementById('totalSubmittedAll');
-    const totalApprovedAllEl    = document.getElementById('totalApprovedAll');
-    const totalPreviewAllEl     = document.getElementById('totalPreviewAll');
-    const totalRejectedAllEl    = document.getElementById('totalRejectedAll');
-
-    const totalSubmittedMonthEl = document.getElementById('totalSubmittedMonth');
-
-    let statusChart = null;
-
-    // ──────────────────────────────────────────────────────
-    // Utility: sort month names in calendar order
-    // ──────────────────────────────────────────────────────
-    const monthOrder = [
-      'january','february','march','april','may','june',
-      'july','august','september','october','november','december'
-    ];
-    function sortMonths(a, b) {
-      return monthOrder.indexOf(a) - monthOrder.indexOf(b);
-    }
-
-    // ──────────────────────────────────────────────────────
-    // On page load, compute and fill in the “default” aggregates
-    // ──────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-      // 1) count managers
-      const managerKeys = Object.keys(dummyData2);
-      const numManagers = managerKeys.length;
-      totalManagersEl.textContent = numManagers;
+      // ──────────────────────────────────────────────────────
+      // Data: manager → category → month → { 
+      //    submitted: { subcat: count }, 
+      //    status: { preview, approved, rejected } 
+      // }
+      // ──────────────────────────────────────────────────────
+      const dummyData2 = {
+        john: {
+          Transport: {
+            january: {
+              submitted: { 'Cost Reduction': 22, 'Time Saving': 18, 'Quality Improvement': 5 },
+              status: { preview: 8, approved: 25, rejected: 6 },
+            },
+            february: {
+              submitted: { 'Cost Reduction': 20, 'Time Saving': 17, 'Quality Improvement': 6 },
+              status: { preview: 7, approved: 22, rejected: 5 },
+            },
+          },
+          Facility: {
+            january: {
+              submitted: { 'Cost Reduction': 25, 'Time Saving': 20, 'Quality Improvement': 7 },
+              status: { preview: 10, approved: 28, rejected: 7 },
+            },
+            march: {
+              submitted: { 'Cost Reduction': 19, 'Time Saving': 16, 'Quality Improvement': 6 },
+              status: { preview: 6, approved: 24, rejected: 4 },
+            },
+          },
+          Operation: {
+            april: {
+              submitted: { 'Cost Reduction': 21, 'Time Saving': 17, 'Quality Improvement': 5 },
+              status: { preview: 9, approved: 26, rejected: 5 },
+            },
+          },
+        },
+        jane: {
+          Operation: {
+            january: {
+              submitted: { 'Cost Reduction': 24, 'Time Saving': 19, 'Quality Improvement': 8 },
+              status: { preview: 8, approved: 30, rejected: 6 },
+            },
+            april: {
+              submitted: { 'Cost Reduction': 23, 'Time Saving': 17, 'Quality Improvement': 7 },
+              status: { preview: 7, approved: 28, rejected: 5 },
+            },
+          },
+          Transport: {
+            march: {
+              submitted: { 'Cost Reduction': 20, 'Time Saving': 15, 'Quality Improvement': 6 },
+              status: { preview: 6, approved: 25, rejected: 4 },
+            },
+          },
+          Facility: {
+            february: {
+              submitted: { 'Cost Reduction': 18, 'Time Saving': 16, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 22, rejected: 3 },
+            },
+          },
+        },
+        mark: {
+          Transport: {
+            march: {
+              submitted: { 'Cost Reduction': 21, 'Time Saving': 17, 'Quality Improvement': 7 },
+              status: { preview: 7, approved: 26, rejected: 5 },
+            },
+          },
+          Facility: {
+            february: {
+              submitted: { 'Cost Reduction': 22, 'Time Saving': 18, 'Quality Improvement': 6 },
+              status: { preview: 6, approved: 24, rejected: 4 },
+            },
+          },
+          Operation: {
+            june: {
+              submitted: { 'Cost Reduction': 20, 'Time Saving': 17, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 23, rejected: 3 },
+            },
+          },
+        },
+        sarah: {
+          Transport: {
+            january: {
+              submitted: { 'Cost Reduction': 18, 'Time Saving': 17, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 22, rejected: 4 },
+            },
+            february: {
+              submitted: { 'Cost Reduction': 19, 'Time Saving': 16, 'Quality Improvement': 6 },
+              status: { preview: 6, approved: 23, rejected: 5 },
+            },
+            april: {
+              submitted: { 'Cost Reduction': 18, 'Time Saving': 15, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 21, rejected: 4 },
+            },
+          },
+          Facility: {
+            may: {
+              submitted: { 'Cost Reduction': 19, 'Time Saving': 15, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 22, rejected: 4 },
+            },
+          },
+        },
+        michael: {
+          Operation: {
+            february: {
+              submitted: { 'Cost Reduction': 17, 'Time Saving': 16, 'Quality Improvement': 4 },
+              status: { preview: 4, approved: 20, rejected: 3 },
+            },
+            march: {
+              submitted: { 'Cost Reduction': 18, 'Time Saving': 17, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 22, rejected: 4 },
+            },
+            may: {
+              submitted: { 'Cost Reduction': 17, 'Time Saving': 15, 'Quality Improvement': 4 },
+              status: { preview: 4, approved: 21, rejected: 3 },
+            },
+          },
+          Facility: {
+            june: {
+              submitted: { 'Cost Reduction': 19, 'Time Saving': 16, 'Quality Improvement': 5 },
+              status: { preview: 5, approved: 23, rejected: 4 },
+            },
+          },
+        },
+      };
 
-      // 2) gather all unique months
+      // Fixed subcategories
+      const fixedSubcategories = [
+        'Cost Reduction',
+        'Time Saving',
+        'Quality Improvement'
+      ];
+
+      // Grab references to DOM elements
+      const managerSelect        = document.getElementById('managerSelect');
+      const categorySelect       = document.getElementById('categorySelect');
+      const subCategorySelect    = document.getElementById('subCategorySelect');
+      const monthSelect          = document.getElementById('monthSelect');
+      const exportBtn            = document.getElementById('exportBtn');
+
+      const managerNameEl        = document.getElementById('managerName');
+      const monthNameEl          = document.getElementById('monthName');
+      const categoryNameEl       = document.getElementById('categoryName');
+      const subCategoryNameEl    = document.getElementById('subCategoryName');
+
+      const totalIdeasCountEl    = document.getElementById('totalIdeasCount');
+      const totalManagersEl      = document.getElementById('totalManagers');
+      const totalMonthsEl        = document.getElementById('totalMonths');
+      const totalCategoriesEl    = document.getElementById('totalCategories');
+
+      const totalSubmittedAllEl  = document.getElementById('totalSubmittedAll');
+      const totalApprovedAllEl   = document.getElementById('totalApprovedAll');
+      const totalPreviewAllEl    = document.getElementById('totalPreviewAll');
+      const totalRejectedAllEl   = document.getElementById('totalRejectedAll');
+
+      const totalSubmittedScopeEl= document.getElementById('totalSubmittedScope');
+
+      let statusChart = null;
+
+      // Utility: sort month names in calendar order
+      const monthOrder = [
+        'january','february','march','april','may','june',
+        'july','august','september','october','november','december'
+      ];
+      function sortMonths(a, b) {
+        return monthOrder.indexOf(a) - monthOrder.indexOf(b);
+      }
+
+      // On page load, compute and fill in the “default” aggregates
+      const managerKeys = Object.keys(dummyData2);
+
+      // 1) count managers
+      totalManagersEl.textContent = managerKeys.length;
+
+      // 2) gather unique months across everyone
       const monthsSet = new Set();
       managerKeys.forEach(key => {
         const mgrData = dummyData2[key];
@@ -382,233 +388,380 @@
         });
       });
       const uniqueMonths = Array.from(monthsSet).sort(sortMonths);
-      const numMonths = uniqueMonths.length;
-      totalMonthsEl.textContent = numMonths;
+      totalMonthsEl.textContent = uniqueMonths.length;
 
-      // 3) compute grand totals per category & grand total
-      let totalTransport = 0;
-      let totalFacility  = 0;
-      let totalOperation = 0;
-      let grandTotalIdeas = 0;
-
+      // 3) compute unique categories across everyone
+      const categoriesSet = new Set();
       managerKeys.forEach(key => {
         const mgrData = dummyData2[key];
-        ['Transport','Facility','Operation'].forEach(catName => {
-          const catObj = mgrData[catName];
-          if (!catObj) return;
-          Object.values(catObj).forEach(monthObj => {
-            const subCount = Object.values(monthObj.submitted).reduce((a,b) => a + b, 0);
-            grandTotalIdeas += subCount;
-            if (catName === 'Transport') totalTransport += subCount;
-            if (catName === 'Facility')  totalFacility  += subCount;
-            if (catName === 'Operation') totalOperation += subCount;
+        Object.keys(mgrData).forEach(cat => categoriesSet.add(cat));
+      });
+      totalCategoriesEl.textContent = categoriesSet.size;
+
+      // 4) compute grand totals across all managers/categories/months
+      let grandPrev = 0, grandAppr = 0, grandRej = 0;
+      managerKeys.forEach(key => {
+        const mgrData = dummyData2[key];
+        Object.values(mgrData).forEach(catObj => {
+          Object.values(catObj).forEach(mthObj => {
+            grandPrev  += mthObj.status.preview;
+            grandAppr  += mthObj.status.approved;
+            grandRej   += mthObj.status.rejected;
           });
         });
       });
+      const grandSubSum = grandPrev + grandAppr + grandRej;
 
-      totalIdeasCountEl.textContent = grandTotalIdeas;
+      totalIdeasCountEl.textContent      = grandSubSum;
+      totalSubmittedAllEl.textContent    = grandSubSum;
+      totalPreviewAllEl.textContent      = grandPrev;
+      totalApprovedAllEl.textContent     = grandAppr;
+      totalRejectedAllEl.textContent     = grandRej;
+      totalSubmittedScopeEl.textContent  = grandSubSum;
 
-      // Fill the “default” table row:
-      managerNameEl.textContent  = numManagers;
-      monthNameEl.textContent    = numMonths;
-      transportEl.textContent    = totalTransport;
-      facilityEl.textContent     = totalFacility;
-      operationEl.textContent    = totalOperation;
-
-      // Disable month dropdown and export button initially
-      monthSelect.disabled = true;
-      exportBtn.disabled   = true;
-    });
-
-    // ──────────────────────────────────────────────────────
-    // When “Select Manager” changes:
-    //   • rebuild months for that manager
-    //   • clear table/chart
-    //   • reset all four “Selected Months” cards to 0
-    //   • disable Export until month is picked
-    // ──────────────────────────────────────────────────────
-    managerSelect.addEventListener('change', () => {
-      const mgrKey = managerSelect.value;
-
-      // Reset month dropdown + table/chart + export button
-      monthSelect.innerHTML = '<option value="" disabled selected>Select a month</option>';
-      monthSelect.disabled  = true;
-      resetTableRow();
-      exportBtn.disabled    = true;
-
-      // Reset the four “Selected Months” totals to 0
-      totalSubmittedAllEl.textContent = '0';
-      totalApprovedAllEl.textContent  = '0';
-      totalPreviewAllEl.textContent   = '0';
-      totalRejectedAllEl.textContent  = '0';
-
-      if (!mgrKey) return;
-
-      // 1) gather that manager’s months
-      const managerData = dummyData2[mgrKey];
-      const monthsSet = new Set();
-      Object.values(managerData).forEach(catObj => {
-        Object.keys(catObj).forEach(mth => monthsSet.add(mth));
-      });
-      const sortedMonths = Array.from(monthsSet).sort(sortMonths);
-      sortedMonths.forEach(mth => {
-        const opt = document.createElement('option');
-        opt.value       = mth;
-        opt.textContent = mth.charAt(0).toUpperCase() + mth.slice(1);
-        monthSelect.appendChild(opt);
-      });
-      monthSelect.disabled = false;
-
-      // (Do NOT compute the four “Selected Months” totals here anymore)
-    });
-
-    // ──────────────────────────────────────────────────────
-    // When “Select Month” changes:
-    //   • fill table row + “Selected Month” total + chart
-    //   • compute and fill the four “Selected Months” totals
-    //   • enable export button
-    // ──────────────────────────────────────────────────────
-    monthSelect.addEventListener('change', () => {
-      const mgrKey = managerSelect.value;
-      const mthKey = monthSelect.value;
-      if (!mgrKey || !mthKey) {
-        resetTableRow();
-        exportBtn.disabled = true;
-        return;
-      }
-
-      const managerData = dummyData2[mgrKey];
-      function getCategoryTotals(catName) {
-        const catObj = managerData[catName];
-        if (!catObj || !catObj[mthKey]) {
-          return { submitted: 0, preview: 0, approved: 0, rejected: 0 };
-        }
-        const sub = Object.values(catObj[mthKey].submitted).reduce((a,b) => a + b, 0);
-        return {
-          submitted: sub,
-          preview:   catObj[mthKey].status.preview,
-          approved:  catObj[mthKey].status.approved,
-          rejected:  catObj[mthKey].status.rejected,
-        };
-      }
-
-      const tTot = getCategoryTotals('Transport');
-      const fTot = getCategoryTotals('Facility');
-      const oTot = getCategoryTotals('Operation');
-
-      managerNameEl.textContent = managerSelect.options[managerSelect.selectedIndex].text;
-      monthNameEl.textContent   = mthKey.charAt(0).toUpperCase() + mthKey.slice(1);
-      transportEl.textContent   = tTot.submitted;
-      facilityEl.textContent    = fTot.submitted;
-      operationEl.textContent   = oTot.submitted;
-
-      // “Selected Month” total (for the doughnut header)
-      const monthSum = tTot.submitted + fTot.submitted + oTot.submitted;
-      totalSubmittedMonthEl.textContent = monthSum;
-
-      // Doughnut chart data = status for that month
-      const chartData = [
-        tTot.preview + fTot.preview + oTot.preview,
-        tTot.approved + fTot.approved + oTot.approved,
-        tTot.rejected + fTot.rejected + oTot.rejected,
-      ];
-      updateStatusChart(chartData);
-
-      // ──────────────────────────────────────────────────
-      // Now compute the four “Selected Months” totals
-      // (i.e. sum of preview/approved/rejected across all months
-      //  for the chosen manager)
-      // ──────────────────────────────────────────────────
-      let sumSubs = 0, sumAppr = 0, sumPrev = 0, sumRej = 0;
-      Object.values(managerData).forEach(catObj => {
-        Object.values(catObj).forEach(mthObj => {
-          const monthlySubs = Object.values(mthObj.submitted).reduce((a,b) => a + b, 0);
-          sumSubs += monthlySubs;
-          sumAppr += mthObj.status.approved;
-          sumPrev += mthObj.status.preview;
-          sumRej  += mthObj.status.rejected;
-        });
-      });
-
-      totalSubmittedAllEl.textContent = sumSubs;
-      totalApprovedAllEl.textContent  = sumAppr;
-      totalPreviewAllEl.textContent   = sumPrev;
-      totalRejectedAllEl.textContent  = sumRej;
-
-      exportBtn.disabled = false;
-    });
-
-    // ──────────────────────────────────────────────────────
-    // Export the currently displayed row to Excel
-    // ──────────────────────────────────────────────────────
-    exportBtn.addEventListener('click', () => {
-      const mgrName   = managerNameEl.textContent;
-      const monthName = monthNameEl.textContent;
-      const tVal      = transportEl.textContent;
-      const fVal      = facilityEl.textContent;
-      const oVal      = operationEl.textContent;
-
-      if (
-        !mgrName ||
-        !monthName ||
-        (tVal === '0' && fVal === '0' && oVal === '0')
-      ) {
-        return alert('No data to export for the selected manager/month.');
-      }
-
-      const aoa = [
-        ['Manager', 'Month', 'Transport', 'Facility', 'Operation'],
-        [mgrName, monthName, tVal, fVal, oVal],
-      ];
-      const ws = XLSX.utils.aoa_to_sheet(aoa);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Report');
-      XLSX.writeFile(wb, `${mgrName}_${monthName}_report.xlsx`);
-    });
-
-    // ──────────────────────────────────────────────────────
-    // Draw or update Chart.js doughnut
-    // ──────────────────────────────────────────────────────
-    function updateStatusChart(dataArr) {
+      // Initialize the “overall” chart on load
       const ctx = document.getElementById('statusChart').getContext('2d');
-      if (!statusChart) {
-        statusChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: ['In-Preview', 'Approved', 'Rejected'],
-            datasets: [
-              {
-                data: dataArr,
-                backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
-              },
-            ],
+      statusChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['In-Preview', 'Approved', 'Rejected'],
+          datasets: [{
+            data: [grandPrev, grandAppr, grandRej],
+            backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
+          }],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' },
+            title: { display: true, text: 'Overall Status Breakdown' },
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { position: 'bottom' },
-              title: { display: true, text: 'Idea Status Breakdown' },
-            },
-          },
-        });
-      } else {
-        statusChart.data.datasets[0].data = dataArr;
-        statusChart.update();
-      }
-    }
+        },
+      });
 
-    // ──────────────────────────────────────────────────────
-    // Reset helpers
-    // ──────────────────────────────────────────────────────
-    function resetTableRow() {
-      managerNameEl.textContent   = '—';
-      monthNameEl.textContent     = '—';
-      transportEl.textContent     = '0';
-      facilityEl.textContent      = '0';
-      operationEl.textContent     = '0';
-      totalSubmittedMonthEl.textContent = '0';
-      if (statusChart) updateStatusChart([0, 0, 0]);
-    }
+      // Disable downstream selects + export initially
+      categorySelect.disabled    = true;
+      subCategorySelect.disabled = true;
+      monthSelect.disabled       = true;
+      exportBtn.disabled         = true;
+
+      // Clear table fields
+      resetTableRow();
+
+      // When “Select Manager” changes:
+      managerSelect.addEventListener('change', () => {
+        const mgrKey = managerSelect.value;
+
+        // Reset downstream selects
+        categorySelect.innerHTML    = '<option value="" disabled selected>Select a category</option>';
+        subCategorySelect.innerHTML = '<option value="" disabled selected>Select a subcategory</option>';
+        monthSelect.innerHTML       = '<option value="" disabled selected>Select a month</option>';
+        categorySelect.disabled     = true;
+        subCategorySelect.disabled  = true;
+        monthSelect.disabled        = true;
+        exportBtn.disabled          = true;
+
+        // Reset table
+        resetTableRow();
+
+        if (!mgrKey) {
+          // Clear all four cards if no manager chosen
+          totalSubmittedAllEl.textContent   = '0';
+          totalPreviewAllEl.textContent     = '0';
+          totalApprovedAllEl.textContent    = '0';
+          totalRejectedAllEl.textContent    = '0';
+          totalSubmittedScopeEl.textContent = '0';
+          statusChart.data.datasets[0].data = [0,0,0];
+          statusChart.options.plugins.title.text = 'Status Breakdown';
+          statusChart.update();
+          return;
+        }
+
+        const managerData = dummyData2[mgrKey];
+
+        // Compute manager-level aggregates
+        let mgrPrev = 0, mgrAppr = 0, mgrRej = 0;
+        Object.values(managerData).forEach(catObj => {
+          Object.values(catObj).forEach(mthObj => {
+            mgrPrev  += mthObj.status.preview;
+            mgrAppr  += mthObj.status.approved;
+            mgrRej   += mthObj.status.rejected;
+          });
+        });
+        const mgrSubSum = mgrPrev + mgrAppr + mgrRej;
+
+        // Update “All Months” cards for this manager
+        totalSubmittedAllEl.textContent   = mgrSubSum;
+        totalPreviewAllEl.textContent     = mgrPrev;
+        totalApprovedAllEl.textContent    = mgrAppr;
+        totalRejectedAllEl.textContent    = mgrRej;
+        totalSubmittedScopeEl.textContent = mgrSubSum;
+
+        // Update “Manager‐level” table row
+        managerNameEl.textContent     = managerSelect.options[managerSelect.selectedIndex].text;
+        monthNameEl.textContent       = '—';
+        categoryNameEl.textContent    = '—';
+        subCategoryNameEl.textContent = '—';
+
+        // Update chart to show manager‐level status breakdown
+        statusChart.data.datasets[0].data = [mgrPrev, mgrAppr, mgrRej];
+        statusChart.options.plugins.title.text = 'Status Breakdown for ' + managerNameEl.textContent;
+        statusChart.update();
+
+        // Populate category dropdown
+        Object.keys(managerData).forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value       = cat;
+          opt.textContent = cat;
+          categorySelect.appendChild(opt);
+        });
+        categorySelect.disabled = false;
+      });
+
+      // When “Select Category” changes:
+      categorySelect.addEventListener('change', () => {
+        const mgrKey = managerSelect.value;
+        const catKey = categorySelect.value;
+
+        // Reset downstream selects
+        subCategorySelect.innerHTML = '<option value="" disabled selected>Select a subcategory</option>';
+        monthSelect.innerHTML       = '<option value="" disabled selected>Select a month</option>';
+        subCategorySelect.disabled  = false;
+        monthSelect.disabled        = true;
+        exportBtn.disabled          = true;
+
+        // Reset table
+        resetTableRow();
+
+        if (!mgrKey || !catKey) {
+          // Clear “All Months” cards if no category is chosen
+          totalSubmittedAllEl.textContent   = '0';
+          totalPreviewAllEl.textContent     = '0';
+          totalApprovedAllEl.textContent    = '0';
+          totalRejectedAllEl.textContent    = '0';
+          totalSubmittedScopeEl.textContent = '0';
+          statusChart.data.datasets[0].data = [0,0,0];
+          statusChart.options.plugins.title.text = 'Status Breakdown';
+          statusChart.update();
+          return;
+        }
+
+        const managerData = dummyData2[mgrKey];
+        const catObj      = managerData[catKey];
+
+        // Compute category-level aggregates
+        let catPrev = 0, catAppr = 0, catRej = 0;
+        Object.values(catObj).forEach(mthObj => {
+          catPrev  += mthObj.status.preview;
+          catAppr  += mthObj.status.approved;
+          catRej   += mthObj.status.rejected;
+        });
+        const catSubSum = catPrev + catAppr + catRej;
+
+        // Update “All Months” cards for this category
+        totalSubmittedAllEl.textContent   = catSubSum;
+        totalPreviewAllEl.textContent     = catPrev;
+        totalApprovedAllEl.textContent    = catAppr;
+        totalRejectedAllEl.textContent    = catRej;
+        totalSubmittedScopeEl.textContent = catSubSum;
+
+        // Update “Manager+Category” table row
+        managerNameEl.textContent     = managerSelect.options[managerSelect.selectedIndex].text;
+        monthNameEl.textContent       = '—';
+        categoryNameEl.textContent    = catKey;
+        subCategoryNameEl.textContent = '—';
+
+        // Update chart to category-level breakdown
+        statusChart.data.datasets[0].data = [catPrev, catAppr, catRej];
+        statusChart.options.plugins.title.text = 'Status Breakdown for ' + catKey;
+        statusChart.update();
+
+        // Populate subCategory dropdown
+        fixedSubcategories.forEach(sub => {
+          const opt = document.createElement('option');
+          opt.value       = sub;
+          opt.textContent = sub;
+          subCategorySelect.appendChild(opt);
+        });
+      });
+
+      // When “Select Subcategory” changes:
+      subCategorySelect.addEventListener('change', () => {
+        const mgrKey   = managerSelect.value;
+        const catKey   = categorySelect.value;
+        const subKey   = subCategorySelect.value;
+
+        // Reset month dropdown
+        monthSelect.innerHTML = '<option value="" disabled selected>Select a month</option>';
+        monthSelect.disabled  = true;
+        exportBtn.disabled    = true;
+
+        // Reset table
+        resetTableRow();
+
+        if (!mgrKey || !catKey || !subKey) {
+          // Clear “All Months” cards if no subcategory chosen
+          totalSubmittedAllEl.textContent   = '0';
+          totalPreviewAllEl.textContent     = '0';
+          totalApprovedAllEl.textContent    = '0';
+          totalRejectedAllEl.textContent    = '0';
+          totalSubmittedScopeEl.textContent = '0';
+          statusChart.data.datasets[0].data = [0,0,0];
+          statusChart.options.plugins.title.text = 'Status Breakdown';
+          statusChart.update();
+          return;
+        }
+
+        const managerData = dummyData2[mgrKey];
+        const catObj      = managerData[catKey];
+
+        // Compute subcategory-level aggregates across all months
+        let subPrev = 0, subAppr = 0, subRej = 0;
+        Object.values(catObj).forEach(mthObj => {
+          if (mthObj.submitted.hasOwnProperty(subKey)) {
+            subPrev  += mthObj.status.preview;
+            subAppr  += mthObj.status.approved;
+            subRej   += mthObj.status.rejected;
+          }
+        });
+        const subSubSum = subPrev + subAppr + subRej;
+
+        // Update “All Months” cards for this subcategory
+        totalSubmittedAllEl.textContent   = subSubSum;
+        totalPreviewAllEl.textContent     = subPrev;
+        totalApprovedAllEl.textContent    = subAppr;
+        totalRejectedAllEl.textContent    = subRej;
+        totalSubmittedScopeEl.textContent = subSubSum;
+
+        // Update “Manager+Category+Subcategory” table row
+        managerNameEl.textContent     = managerSelect.options[managerSelect.selectedIndex].text;
+        monthNameEl.textContent       = '—';
+        categoryNameEl.textContent    = catKey;
+        subCategoryNameEl.textContent = subKey;
+
+        // Update chart to subcategory-level breakdown
+        statusChart.data.datasets[0].data = [subPrev, subAppr, subRej];
+        statusChart.options.plugins.title.text = 'Status Breakdown for ' + subKey;
+        statusChart.update();
+
+        // Populate month dropdown (all months for this category)
+        Object.keys(catObj)
+          .sort(sortMonths)
+          .forEach(mth => {
+            const opt = document.createElement('option');
+            opt.value       = mth;
+            opt.textContent = mth.charAt(0).toUpperCase() + mth.slice(1);
+            monthSelect.appendChild(opt);
+          });
+        monthSelect.disabled = false;
+      });
+
+      // When “Select Month” changes:
+      monthSelect.addEventListener('change', () => {
+        const mgrKey = managerSelect.value;
+        const catKey = categorySelect.value;
+        const subKey = subCategorySelect.value;
+        const mthKey = monthSelect.value;
+
+        if (!mgrKey || !catKey || !subKey || !mthKey) {
+          resetTableRow();
+          resetTotals();
+          exportBtn.disabled = true;
+          statusChart.data.datasets[0].data = [0,0,0];
+          statusChart.options.plugins.title.text = 'Status Breakdown';
+          statusChart.update();
+          totalSubmittedScopeEl.textContent = '0';
+          return;
+        }
+
+        const managerData = dummyData2[mgrKey];
+        const catObj      = managerData[catKey];
+        const mthObj      = catObj[mthKey];
+
+        // Calculate submitted = preview + approved + rejected
+        const prevCount    = mthObj.status.preview;
+        const apprCount    = mthObj.status.approved;
+        const rejCount     = mthObj.status.rejected;
+        const subCount     = prevCount + apprCount + rejCount;
+
+        // Update table row (just 4 cells)
+        managerNameEl.textContent     = managerSelect.options[managerSelect.selectedIndex].text;
+        monthNameEl.textContent       = mthKey.charAt(0).toUpperCase() + mthKey.slice(1);
+        categoryNameEl.textContent    = catKey;
+        subCategoryNameEl.textContent = subKey;
+
+        // Update chart to show status breakdown for this subcategory in that month
+        statusChart.data.datasets[0].data = [prevCount, apprCount, rejCount];
+        statusChart.options.plugins.title.text =
+          `Status for ${catKey} (${subKey}) in ${monthNameEl.textContent}`;
+        statusChart.update();
+
+        totalSubmittedScopeEl.textContent = subCount;
+
+        // Compute “All Months” totals across this category/subcategory
+        let sumPrev = 0, sumAppr = 0, sumRej = 0;
+        Object.values(catObj).forEach(monthData => {
+          if (monthData.submitted.hasOwnProperty(subKey)) {
+            sumPrev  += monthData.status.preview;
+            sumAppr  += monthData.status.approved;
+            sumRej   += monthData.status.rejected;
+          }
+        });
+        const sumSub = sumPrev + sumAppr + sumRej;
+
+        totalSubmittedAllEl.textContent = sumSub;
+        totalApprovedAllEl.textContent  = sumAppr;
+        totalPreviewAllEl.textContent   = sumPrev;
+        totalRejectedAllEl.textContent  = sumRej;
+
+        exportBtn.disabled = false;
+      });
+
+      // Export the currently displayed row to Excel
+      exportBtn.addEventListener('click', () => {
+        const mgrName      = managerNameEl.textContent;
+        const monthName    = monthNameEl.textContent;
+        const catName      = categoryNameEl.textContent;
+        const subName      = subCategoryNameEl.textContent;
+        const subCount     = parseInt(totalSubmittedScopeEl.textContent, 10);
+        const prevCount    = statusChart.data.datasets[0].data[0];
+        const apprCount    = statusChart.data.datasets[0].data[1];
+        const rejCount     = statusChart.data.datasets[0].data[2];
+
+        if (
+          !mgrName || !catName || !subName ||
+          (subCount === 0)
+        ) {
+          return alert('No data to export for the selected filters.');
+        }
+
+        const aoa = [
+          ['Manager', 'Month', 'Category', 'Subcategory', 'Submitted', 'In-Preview', 'Approved', 'Rejected'],
+          [mgrName, monthName === '—' ? 'All' : monthName, catName, subName, subCount, prevCount, apprCount, rejCount],
+        ];
+        const ws = XLSX.utils.aoa_to_sheet(aoa);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Report');
+        const fileName = `${mgrName}_${catName}_${subName}_${monthName === '—' ? 'All' : monthName}_report.xlsx`;
+        XLSX.writeFile(wb, fileName);
+      });
+
+      // Reset helpers
+      function resetTableRow() {
+        managerNameEl.textContent      = '—';
+        monthNameEl.textContent        = '—';
+        categoryNameEl.textContent     = '—';
+        subCategoryNameEl.textContent  = '—';
+      }
+
+      function resetTotals() {
+        totalSubmittedAllEl.textContent   = '0';
+        totalApprovedAllEl.textContent    = '0';
+        totalPreviewAllEl.textContent     = '0';
+        totalRejectedAllEl.textContent    = '0';
+        totalSubmittedScopeEl.textContent = '0';
+      }
+    });
   </script>
 
   <!-- Bootstrap JS (unchanged) -->
